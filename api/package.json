@@ -1,0 +1,21 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "AgroSmart-BackEnd",
+  "main": "index.js",
+  "dependencies": {
+    "bcrypt": "^3.0.7",
+    "config": "^3.2.5",
+    "core-util-is": "^1.0.2",
+    "express": "^4.17.1",
+    "mongoose": "^5.8.9",
+    "shortid": "^2.2.15"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node index",
+    "dev": "nodemon index"
+  },
+  "author": "",
+  "license": "ISC"
+}
