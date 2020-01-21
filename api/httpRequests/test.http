@@ -1,0 +1,12 @@
+  
+POST http://localhost:5000/user/create
+Content-Type: application/json
+
+{
+  "name": "Dipan Roy",
+  "email": "dipanroy@mindwebs.org",
+  "phone": "+919163034929",
+  "password": "123456",
+  "accessLevel": "W",
+  "defaultProperty": 0
+}
