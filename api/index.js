@@ -12,6 +12,7 @@ app.use(express.json({ extend: false }));
 app.use('/', require('./routes/root'));
 app.use('/user', require('./routes/user'));
 app.use('/node_data', require('./routes/node_data'));
+app.use('/property', require('./routes/property'));
 
 const PORT = 7988;
 
