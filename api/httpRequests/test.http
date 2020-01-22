@@ -1,12 +1,14 @@
   
-POST http://localhost:5000/user/create
+POST http://localhost:7988/property/create
 Content-Type: application/json
 
 {
-  "name": "Dipan Roy",
-  "email": "dipanroy@mindwebs.org",
-  "phone": "+919163034929",
-  "password": "123456",
-  "accessLevel": "W",
-  "defaultProperty": 0
+  "name": "MinD Webs",
+  "uniqueCode": "dipanroy@mindwebs.org",
+  "location": "Madhyamgram",
+  "latitude": "88.12345678",
+  "longitude": "75.12345678",
+  "elevation": "10",
+  "area": "0.72",
+  "adminName": "Dipan Roy"
 }

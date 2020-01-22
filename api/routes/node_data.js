@@ -34,3 +34,5 @@ router.post('/send', async (req, res) => {
     }
 
 });
+
+module.exports = router;

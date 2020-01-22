@@ -6,7 +6,7 @@ const shortid = require('shortid');
 const Property = require('../models/Property');
 
 router.post('/create', async (req, res) => {
-    const propertyId = shortid.generate();
+    const propertyId = shortid.generate();;
     const { propertyName } = req.body;
     const { uniqueCode } = req.body;
     const { location } = req.body;
@@ -68,8 +68,7 @@ router.post('/update', async (req, res) => {
             if(mode == "P" && uniqueCode == property.uniqueCode) {
                 let update = await Property.updateOne({ propertyId }, { $set: { latitude, longitude, elevation, area } });
                 if(update) {
-                    var message = "Updae Successfully!";
-                    var propertyId = property.propertyId;
+                    var message = "Updae Successfully!";                    
                     var returnJson = { message, name };
                     res.status(200).json(returnJson);
                 } else {
@@ -79,7 +78,6 @@ router.post('/update', async (req, res) => {
                 let update = await Property.updateOne({ uniqueCode }, { $set: { latitude, longitude, elevation, area } });
                 if(update) {
                     var message = "Update Successfully!";
-                    var propertyId = property.propertyId;
                     var returnJson = { message, propertyId };
                     res.status(200).json(returnJson);
                 } else {
@@ -96,6 +94,5 @@ router.post('/update', async (req, res) => {
         res.status(500).json('Internal Server Error');
     }
 });
-
 
 module.exports = router;

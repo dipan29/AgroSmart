@@ -57,7 +57,7 @@ router.post('/login', async (req, res) => {
 
         if(user){
             if(bcrypt.compareSync(pass, user.password)) {
-                const hashKey = shortid.generate();
+                const hashKey = shortid.generate();;
                 let loginHash = bcrypt.hashSync(hashKey,saltRounds);
                 var lastLogin = new Date();
                 let update = await User.updateOne({email},{ $inc: { loginNo : 1}, $set: { loginHash, lastLogin }});
