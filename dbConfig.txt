@@ -4,7 +4,6 @@ username - agUser
 password - agrSm#1220
 Authentication Database - dbAgro
 
-
 COMMANDS TO CREATE A NEW DATABASE & USER after logging in as Admin User
 
 > use dbAgro
