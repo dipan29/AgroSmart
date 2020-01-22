@@ -1,4 +1,4 @@
-  
+
 const mongoose = require('mongoose');
 
 const dataSchema = new mongoose.Schema({
@@ -6,7 +6,7 @@ const dataSchema = new mongoose.Schema({
     deviceID: String,
     deviceType: {type: String, default: "POD"},
     humidity: String,
-    water_level: Number,
+    waterLevel: Number,
     temperature: String,
     moisture: String,
     dateTime: { type: String, default: Date.now }
@@ -14,4 +14,4 @@ const dataSchema = new mongoose.Schema({
   collection: 'node_data',
 });
 
-module.exports = mongoose.model('node_data', dataSchema);
+module.exports = mongoose.model('Node_data', dataSchema);

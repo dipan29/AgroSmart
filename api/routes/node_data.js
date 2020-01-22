@@ -9,7 +9,7 @@ router.post('/send', async (req, res) => {
     const { propertyID } = req.body;
     const { temperature } = req.body;
     const { humidity } = req.body;
-    const { water_level } = req.body;
+    const { waterLevel } = req.body;
     const { moisture } = req.body;
 
     try {
@@ -18,7 +18,7 @@ router.post('/send', async (req, res) => {
             deviceID,
             deviceType,
             humidity,
-            water_level,
+            waterLevel,
             temperature,
             moisture,
             dateTime: new Date()

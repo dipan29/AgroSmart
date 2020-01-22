@@ -1,0 +1,19 @@
+/* This is for relaying the different parameters of the current position of the controller */
+const mongoose = require('mongoose');
+
+const controlSchema = new mongoose.Schema({
+    propertyID: {type: Number, default: 0},
+    controllerID: String,
+    controllerType: {type: String, default: "ESP32"},
+    relay1: Number, // 0 - Off; 1 - On
+    relay2: Number,
+    relay3: Number,
+    relay4: Number,
+    servo1: Number, // 0-180 (in degrees)
+    lastChangedTime: { type: Date, default: Date.now },
+    createTime: String
+},{
+  collection: 'controllers',
+});
+
+module.exports = mongoose.model('Controller', controlSchema);
