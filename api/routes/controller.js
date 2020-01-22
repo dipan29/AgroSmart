@@ -57,6 +57,32 @@ router.post('/create', async (req, res) => {
     }
 });
 
+router.post('/update', async (req, res) => {
+    const { controllerID } = req.body;
+    const { relay1 } = req.body;
+    const { relay2 } = req.body;
+    const { relay3 } = req.body;
+    const { relay4 } = req.body;
+    const { servo1 } = req.body;
+
+    try{
+        let controller = await Controller.findOne({ controllerID });
+        if(controller) {
+            let update = await Controller.updateOne({ controllerID }, { $set: { relay1, relay2, relay3, relay4, servo1 } });
+            if(update){
+                res.status(200).json('Controller Status Update, Acknoledged!');
+            } else {
+                res.status(502).json('There was some error!');
+            }
+        } else {
+            res.status(404).json('Controller ID not Found');
+        }
+    } catch (err) {
+        console.error(err);
+        res.status(500).json('Internal Server Error');
+    }    
+});
+
 //Controller Update API Here
 
 module.exports = router;
