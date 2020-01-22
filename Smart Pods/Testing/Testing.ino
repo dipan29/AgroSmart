@@ -1,5 +1,5 @@
 #include <ESP8266WiFi.h>
-#include "DHT.h"
+#include "dht.h"
 
 /************************* Pin Definition *********************************/
 //Relays for switching appliances
@@ -10,10 +10,8 @@
 
 //DHT11 for reading temperature and humidity value
 #define DHTPIN  D7
-
 //buzzer to know the status of MQTT connections and can be used for any other purpose according to your project need.
 #define buzzer  D0
-
 //Selection pins for multiplexer module to switch between different sensors and give data on a single analog pin.
 #define S0  D3
 #define S1  D4
@@ -27,9 +25,9 @@
 #define WLAN_PASS       "smrtMW@3c"  //Wifi Password
 
 
-#define DHTTYPE         DHT11     // DHT 11 
+#define DHTTYPE DHT11     // DHT 11 
 
-DHT dht(DHTPIN, DHTTYPE);
+dht DHT;
 uint32_t delayMS;
 
 void setup() {
@@ -46,7 +44,7 @@ void setup() {
   pinMode(A0, INPUT);
 
   digitalWrite(buzzer, HIGH);
-  delay(100);
+  delay(50);
   digitalWrite(buzzer, LOW);
   delay(500);
   Serial.println("AgroSmart - Team SmartRIRD");
@@ -73,12 +71,27 @@ void setup() {
   Serial.println("WiFi connected");
   Serial.println("IP address: "); Serial.println(WiFi.localIP());
   
-  //Setting up DHT sensor
-  dht.begin();
 
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-  
+//  digitalWrite(Relay1,HIGH);
+//  delay(500);
+//  digitalWrite(Relay1,LOW);
+//  delay(500);
+//  digitalWrite(Relay2,HIGH);
+//  delay(1000);
+//  digitalWrite(Relay1,HIGH);
+//  delay(500);
+//  digitalWrite(Relay2,LOW);
+//  delay(1000);
+//  digitalWrite(Relay3,HIGH);
+//  delay(500);
+//  digitalWrite(Relay3,LOW);
+//  delay(1000);
+//  digitalWrite(Relay4,HIGH);
+//  delay(500);
+//  digitalWrite(Relay4,LOW);
+//  delay(1000);
 }
