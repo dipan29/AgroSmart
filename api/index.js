@@ -13,6 +13,6 @@ app.use('/', require('./routes/root'));
 app.use('/user', require('./routes/user'));
 app.use('/node_data', require('./routes/node_data'));
 
-const PORT = 5000;
+const PORT = 7988;
 
-app.listen(PORT, () => console.log(`Server Running and Listening at Port ${PORT}`));
+app.listen(PORT, () => console.log(`AgroSmart Server Running and Listening at Port ${PORT}`));
