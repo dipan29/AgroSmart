@@ -2,13 +2,13 @@
 const mongoose = require('mongoose');
 
 const dataSchema = new mongoose.Schema({
-    propertyID: {type: Number, default: 0},
+    propertyID: String,
     deviceID: String,
-    deviceType: {type: String, default: "POD"},
-    humidity: String,
+    deviceType: { type: String, default: "POD" },
+    humidity: Number,
     waterLevel: Number,
-    temperature: String,
-    moisture: String,
+    temperature: Number,
+    moisture: Number,
     dateTime: { type: String, default: Date.now }
 },{
   collection: 'node_data',

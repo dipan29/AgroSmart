@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const Node_Data = require('../models/Node_data');
+const Node_data = require('../models/Node_data');
 
 router.post('/send', async (req, res) => {
     const { deviceID } = req.body;
@@ -13,7 +13,7 @@ router.post('/send', async (req, res) => {
     const { moisture } = req.body;
 
     try {
-        node_data = new Node_Data({
+        node_data = new Node_data({
             propertyID,
             deviceID,
             deviceType,
