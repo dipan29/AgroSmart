@@ -24,7 +24,7 @@
 #define WLAN_SSID       "MinD Webs SmartThings" //Wifi Name - Case and special character sensitive
 #define WLAN_PASS       "smrtMW@3c"  //Wifi Password
 
-char webHookUrl = "http://115.187.32.210:7988/node_data/";
+//char webHookUrl[] = "http://115.187.32.210:7988/node_data/";
 
 
 #define DHTTYPE DHT11     // DHT 11 
@@ -69,7 +69,11 @@ void setup() {
   digitalWrite(buzzer, HIGH);
   delay(100);
   digitalWrite(buzzer, LOW);
-  
+  delay(200);
+  digitalWrite(buzzer, HIGH);
+  delay(100);
+  digitalWrite(buzzer, LOW);
+
   Serial.println("WiFi connected");
   Serial.println("IP address: "); Serial.println(WiFi.localIP());
   
