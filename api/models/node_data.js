@@ -9,7 +9,7 @@ const dataSchema = new mongoose.Schema({
     waterLevel: Number,
     temperature: Number,
     moisture: Number,
-    dateTime: { type: String, default: Date.now }
+    dateTime: { type: Date, default: Date.now }
 },{
   collection: 'node_data',
 });

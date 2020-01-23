@@ -14,6 +14,7 @@ app.use('/user', require('./routes/user'));
 app.use('/node_data', require('./routes/node_data'));
 app.use('/property', require('./routes/property'));
 app.use('/controller', require('./routes/controller'));
+app.use('/graphs', require('./routes/graphs'));
 
 const PORT = 7988;
 

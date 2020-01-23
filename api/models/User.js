@@ -8,12 +8,12 @@ const userSchema = new mongoose.Schema({
   password: String,
   username: {type: String, default: null},
   accessLevel: String,
-  lastLogin: { type: String, default: null },
+  lastLogin: { type: Date, default: null },
   loginNo: { type: Number, default: 0},
   defaultProperty: Number,
   defaultTimeOut: Number,
   loginHash: {type: String, default: null},
-  createDate: { type: String, default: Date.now }
+  createDate: { type: Date, default: Date.now }
 }, {
   collection: 'users'
 });

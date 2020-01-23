@@ -1,0 +1,8 @@
+POST http://localhost:7988/graphs/fetchAll
+Content-Type: application/json
+
+{
+    "propertyID": "6-YaNQcL",
+    "startDateTime": "2020-01-23T20:12:00.242Z",
+    "endDateTime": "2020-01-23T20:20:49.242Z"
+}

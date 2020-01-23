@@ -83,6 +83,4 @@ router.post('/update', async (req, res) => {
     }    
 });
 
-//Controller Update API Here
-
 module.exports = router;
