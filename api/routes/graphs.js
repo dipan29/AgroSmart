@@ -16,7 +16,6 @@ router.post('/fetchAll', async (req, res) => {
     if(!endDateTime) {
         endDateTime = new Date();
     }
-    
     try {
         if(!controllerID) {
             controller = await Controller.findOne({ propertyID });
@@ -45,5 +44,8 @@ router.post('/fetchAll', async (req, res) => {
         res.status(500).json('Server error');
     }
 });
+
+// Get Details Against Node ID
+// Get Details Against Property & Parameter - }).select('temperature moisture');
 
 module.exports = router;
