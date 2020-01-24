@@ -17,8 +17,11 @@ router.get('/:id', async (req, res) => {
             var relay3 = controller.relay3;
             var relay4 = controller.relay4;
             var servo1 = controller.servo1;
+            var solarIntensity = controller.solarIntensity;
+            if(!solarIntensity)
+                solarIntensity = 0;
             var lastChangedTime = controller.lastChangedTime;
-            var returnJson = { controllerID, relay1, relay2, relay3, relay4, servo1, lastChangedTime };
+            var returnJson = { controllerID, relay1, relay2, relay3, relay4, servo1, solarIntensity, lastChangedTime };
             return res.status(200).json(returnJson);
         } else {
             return res.status(404).json('Controller ID not found!');
@@ -45,6 +48,7 @@ router.post('/create', async (req, res) => {
             relay3: 0,
             relay4: 0,
             servo1: 90,
+            solarIntensity: 0,
             createTime
         });
 
@@ -81,6 +85,28 @@ router.post('/update', async (req, res) => {
         console.error(err);
         res.status(500).json('Internal Server Error');
     }    
+});
+
+router.post('/solar', async (req, res) => {
+    const { controllerID } = req.body;
+    const { solarIntensity } = req.body;
+
+    try {
+        let controller = await Controller.findOne({ controllerID });
+        if(controller) {
+            let update = await Controller.updateOne({ controllerID }, { $set: { solarIntensity } });
+            if(update){
+                res.status(200).json('Solar Intensity Status Update, Acknoledged!');
+            } else {
+                res.status(502).json('There was some error!');
+            }
+        } else {
+            res.status(404).json('Controller ID not Found');
+        }
+    } catch (err) {
+        console.error(err);
+        res.status(500).json('Internal Server Error!');
+    }
 });
 
 module.exports = router;

@@ -10,6 +10,7 @@ const controlSchema = new mongoose.Schema({
     relay3: Number,
     relay4: Number,
     servo1: Number, // 0-180 (in degrees)
+    solarIntensity: { type: Number, default: null },
     lastChangedTime: { type: Date, default: Date.now },
     createTime: String
 },{

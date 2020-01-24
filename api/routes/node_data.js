@@ -11,6 +11,10 @@ router.post('/send', async (req, res) => {
     const { humidity } = req.body;
     const { waterLevel } = req.body;
     const { moisture } = req.body;
+    const { solarIntensity } = req.body;
+    
+    if(!solarIntensity)
+        solarIntensity = 0;
 
     try {
         node_data = new Node_data({
@@ -21,6 +25,7 @@ router.post('/send', async (req, res) => {
             waterLevel,
             temperature,
             moisture,
+            solarIntensity,
             dateTime: new Date()
         });
 
@@ -34,5 +39,6 @@ router.post('/send', async (req, res) => {
     }
 
 });
+
 
 module.exports = router;
