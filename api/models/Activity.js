@@ -5,7 +5,8 @@ const activitySchema = new mongoose.Schema({
     actType: String,
     actUser: { type: String, default: null},
     description: String,
-    additional: { type: String, default: "general"}
+    additional: { type: String, default: "general"},
+    propertyID: String
 }, {
     collection: 'activities',
 });
