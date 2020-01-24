@@ -8,7 +8,7 @@ const router = express.Router();
 // @desc      Redirect to long/original URL
 router.get('/', async (req, res) => {
   try {
-    const outP = "AgroSmar Backend Running Sucessfully!";
+    const outP = "AgroSmart Backend Running Sucessfully!";
     res.status(200).json(outP);
     // res.sendFile(path.join('../html/index.html'));
   } catch (err) {

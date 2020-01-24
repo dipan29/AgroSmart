@@ -10,6 +10,7 @@ app.use(express.json({ extend: false }));
 
 // Define Routes
 app.use('/', require('./routes/root'));
+app.use('/update', require('./routes/cron_server.js'));
 app.use('/user', require('./routes/user'));
 app.use('/node_data', require('./routes/node_data'));
 app.use('/property', require('./routes/property'));
