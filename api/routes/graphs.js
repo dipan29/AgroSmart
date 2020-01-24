@@ -68,12 +68,41 @@ router.post('/node', async (req, res) => {
             nodeDetails.push(nodes);
             var message = "Data for Node ID : " + deviceID;
             res.status(200).json( { message, nodeDetails });
-        }).select(params);
+        }).select(params + " dateTime");
     } catch (err) {
         console.error(err);
         res.status(500).json('Some error occured!');
     }
 });
-// Get Details Against Property & Parameter - }).select('temperature moisture');
+
+router.post('/data', async (req, res) => {
+    const { propertyID } = req.body;
+    const { params } = req.body;
+    let { startDateTime } = req.body;
+    let { endDateTime } = req.body;
+
+    if(!startDateTime) {
+        startDateTime = ("2020-01-01T00:00:00.000Z");
+    }
+    if(!endDateTime) {
+        endDateTime = new Date();
+    }
+    var nodeDetails = [];
+    try {
+        Node_data.find({ propertyID, dateTime: { $gte: startDateTime, $lt: endDateTime } } , function(err, nodes, next) {
+            if(err){
+                res.status(500).json('Some Error Occured');
+                console.log(err);
+                next();
+            }
+            nodeDetails.push(nodes);
+            var message = params + " data for Property ID : " + propertyID;
+            res.status(200).json( { message, nodeDetails });
+        }).select(params + " deviceID dateTime");
+    } catch (err) {
+        console.error(err);
+        res.status(500).json('Some error occured!');
+    }
+});
 
 module.exports = router;
