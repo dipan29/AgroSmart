@@ -45,7 +45,35 @@ router.post('/fetchAll', async (req, res) => {
     }
 });
 
-// Get Details Against Node ID
+router.post('/node', async (req, res) => {
+    const { deviceID } = req.body;
+    const { params } = req.body;
+    let { startDateTime } = req.body;
+    let { endDateTime } = req.body;
+
+    if(!startDateTime) {
+        startDateTime = ("2020-01-01T00:00:00.000Z");
+    }
+    if(!endDateTime) {
+        endDateTime = new Date();
+    }
+    var nodeDetails = [];
+    try {
+        Node_data.find({ deviceID, dateTime: { $gte: startDateTime, $lt: endDateTime } } , function(err, nodes, next) {
+            if(err){
+                res.status(500).json('Some Error Occured');
+                console.log(err);
+                next();
+            }
+            nodeDetails.push(nodes);
+            var message = "Data for Node ID : " + deviceID;
+            res.status(200).json( { message, nodeDetails });
+        }).select(params);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json('Some error occured!');
+    }
+});
 // Get Details Against Property & Parameter - }).select('temperature moisture');
 
 module.exports = router;

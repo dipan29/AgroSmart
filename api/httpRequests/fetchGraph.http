@@ -1,8 +1,9 @@
-POST http://localhost:7988/graphs/fetchAll
+POST http://localhost:7988/graphs/node
 Content-Type: application/json
 
 {
-    "propertyID": "6-YaNQcL",
-    "startDateTime": "2020-01-23T20:12:00.242Z",
-    "endDateTime": "2020-01-23T20:20:49.242Z"
+    "deviceID": "fsoenaof_ffeugqvadshfaiw289AGFibhF",
+    "startDateTime": "2020-01-23T20:13:00.242Z",
+    "endDateTime": "2020-01-23T20:20:49.242Z",
+    "params": "temperature moisture dateTime"
 }
