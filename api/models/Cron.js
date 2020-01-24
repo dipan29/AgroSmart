@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
-const Node_data = require("Node_data");
-const Controller = require("Controller");
+const Node_data = mongoose.model('Node_data').schema;
+const Controller = mongoose.model('Controller').schema;
 
 const cronSchema = new mongoose.Schema({
     createTime: { type: Date, default: Date.now },
@@ -11,8 +11,8 @@ const cronSchema = new mongoose.Schema({
     command: String,
     description: { type: String, default: null},
     propertyID: String,
-    controller: [Controller.Schema],
-    nodes: [Node_data.Schema]
+    controller: [Controller],
+    nodes: [Node_data]
 }, {
     collection: 'cron_jobs',
 });
