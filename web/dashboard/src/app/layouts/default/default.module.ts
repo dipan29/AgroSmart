@@ -23,7 +23,7 @@ import { HelpComponent } from 'src/app/modules/help/help.component';
     SettingsComponent,
     ControlComponent,
     ContactComponent,
-    HelpComponent,
+    HelpComponent
   ],
   imports: [
     CommonModule,
