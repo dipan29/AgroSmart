@@ -17,13 +17,7 @@ import { LoginComponent } from './modules/login/login.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    SettingsComponent,
-    ControlComponent,
-    ContactComponent,
-    HelpComponent,
-    SetupComponent,
-    LoginComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,

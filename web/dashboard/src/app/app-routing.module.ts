@@ -8,7 +8,6 @@ import { ControlComponent } from './modules/control/control.component';
 import { ContactComponent } from './modules/contact/contact.component';
 import { HelpComponent } from './modules/help/help.component';
 import { SetupComponent } from './layouts/setup/setup.component';
-import { LoginComponent } from './modules/login/login.component';
 
 
 const routes: Routes = [{
@@ -35,13 +34,7 @@ const routes: Routes = [{
   }]
 }, {
   path: 'setup',
-  component: SetupComponent,
-  children: [
-    {
-      path: 'login',
-      component: LoginComponent
-    }
-  ]
+  component: SetupComponent
 }];
 
 @NgModule({
