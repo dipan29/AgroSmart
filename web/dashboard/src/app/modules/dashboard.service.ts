@@ -7,6 +7,16 @@ export class DashboardService {
 
   constructor() { }
 
+  currentPlace () {
+    return ['Kolkata'];
+  }
+  currentLatitude(){
+    return ["22.570"]
+  }
+  currentLongitude(){
+    return ["88.370"]
+  }
+
   bigChart() {
     return [{
       name: 'Node 1 - ESP 32',

@@ -9,6 +9,9 @@ import { SettingsComponent } from './modules/settings/settings.component';
 import { ControlComponent } from './modules/control/control.component';
 import { ContactComponent } from './modules/contact/contact.component';
 import { HelpComponent } from './modules/help/help.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { ApixuService } from './modules/apixu.service';
 
 @NgModule({
   declarations: [
@@ -22,9 +25,13 @@ import { HelpComponent } from './modules/help/help.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    DefaultModule
+    DefaultModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    ApixuService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
