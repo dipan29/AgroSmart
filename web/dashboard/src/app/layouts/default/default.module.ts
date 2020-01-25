@@ -15,7 +15,7 @@ import { DashboardService } from 'src/app/modules/dashboard.service';
   declarations: [
     DefaultComponent,
     DashboardComponent,
-    StatsComponent
+    StatsComponent,
   ],
   imports: [
     CommonModule,
