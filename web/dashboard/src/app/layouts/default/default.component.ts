@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title }     from '@angular/platform-browser';
 
 @Component({
   selector: 'app-default',
@@ -9,12 +10,16 @@ export class DefaultComponent implements OnInit {
 
   sideBarOpen = true;
 
-  constructor() { }
+  //constructor() { }
 
   ngOnInit() { }
 
   sideBarToogler() {
     this.sideBarOpen = !this.sideBarOpen;
+  }
+
+  constructor(private titleService:Title) {
+    this.titleService.setTitle("AgroSmart - DashBoard");
   }
 
 }

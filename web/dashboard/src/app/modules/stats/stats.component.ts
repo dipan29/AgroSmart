@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-stats',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StatsComponent implements OnInit {
 
-  constructor() { }
+  //constructor() { }
 
   ngOnInit() {
+  }
+
+  constructor(private titleService:Title) {
+    this.titleService.setTitle("AgroSmart - Status");
   }
 
 }

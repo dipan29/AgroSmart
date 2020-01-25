@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { StatsComponent } from 'src/app/modules/stats/stats.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MatSidenavModule, MatDividerModule } from '@angular/material';
+import { BrowserModule, Title }  from '@angular/platform-browser';
 
 
 @NgModule({
@@ -19,7 +20,11 @@ import { MatSidenavModule, MatDividerModule } from '@angular/material';
     RouterModule,
     SharedModule,
     MatSidenavModule,
-    MatDividerModule
-  ]
+    MatDividerModule,
+    BrowserModule
+  ],
+  providers: [
+    Title
+  ],
 })
 export class DefaultModule { }
