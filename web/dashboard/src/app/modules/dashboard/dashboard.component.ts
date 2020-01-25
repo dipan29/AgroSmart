@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { DashboardService } from '../dashboard.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,11 +9,15 @@ import { Title } from '@angular/platform-browser';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private titleService:Title) {
+  bigChart = []
+
+  constructor(private titleService:Title, private dashBoardService:DashboardService) {
     this.titleService.setTitle("AgroSmart - DashBoard");
   }
 
   ngOnInit() {
+    this.bigChart = this.dashBoardService.bigChart();
+    console.log(this.bigChart);
   }
 
 }

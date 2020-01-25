@@ -1,19 +1,27 @@
 <div>
-    <app-data-charts></app-data-charts>
+    <app-data-charts [data]="bigChart"></app-data-charts>
 </div>
-
+<br>
 <mat-divider></mat-divider>
-
-<div>
-    <div>Line Charts</div>
-    <div>Line Charts</div>
-    <div>Line Charts</div>
-    <div>Line Charts</div>
+<br>
+<div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px" class="control-card">
+    <mat-card fxFlex="25">
+        <app-cards  label="Motor Pump 1" switchText="Turn On" toggleState="false"></app-cards>
+    </mat-card>
+    <mat-card fxFlex="25">
+        <app-cards label="Motor Pump 2" switchText="Turn On" toggleState="false"></app-cards>
+    </mat-card>
+    <mat-card fxFlex="25">
+        <app-cards label="Switch 3" switchText="Turn Off" toggleState="true"></app-cards>
+    </mat-card>
+    <mat-card fxFlex="25">
+        <app-cards label="Switch 4" switchText="Turn Off" toggleState="true"></app-cards>
+    </mat-card>
 </div>
-
+<br>
 <mat-divider></mat-divider>
-
-<div>
-    <div>Table</div>
-    <div>Pi Charts</div>
+<br>
+<div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px" class="stats-card">
+    <div class="table-1"></div>
+    <div class="chart-2"></div>
 </div>

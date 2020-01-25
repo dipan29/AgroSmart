@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import * as Highcharts from 'highcharts';
 import HC_exporting from 'highcharts/modules/exporting';
 
@@ -12,6 +12,7 @@ export class DataChartsComponent implements OnInit {
   chartOptions: {};
 
   Highcharts = Highcharts;
+  @Input() data: any = [];
 
   constructor() { }
 
@@ -49,21 +50,14 @@ export class DataChartsComponent implements OnInit {
           enableMouseTracking: false
         }
       },
-      series: [{
-        name: 'Node 1 - ESP 32',
-        data: [13.36, 14.20, 16.05, 14.5, 15.2]
-      }, {
-        name: 'Node 2 - ESP 8266',
-        data: [13.45, 14.2, 15.9, 14.70, 15.4]
-      }, {
-        name: 'Node 3 - ESP 32',
-        data: [13.22, 14.28, 16.1, 14.65, 15.29]
-      }, {
-        name: 'Controller 1',
-        data: [13.30, 14.12, 15.95, 14.5, 15.35]
-      }]
+      series: this.data
     };
     HC_exporting(Highcharts);
+    setTimeout(() => {
+      window.dispatchEvent(
+        new Event('resize')
+      );
+    }, 300);
   }
 
 }
