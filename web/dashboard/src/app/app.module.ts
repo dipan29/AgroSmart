@@ -8,6 +8,8 @@ import { DefaultModule } from './layouts/default/default.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ApixuService } from './modules/apixu.service';
+import { LoginModule } from './layouts/login/login.module';
+import { SetupModule } from './layouts/setup/setup.module';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,8 @@ import { ApixuService } from './modules/apixu.service';
     AppRoutingModule,
     BrowserAnimationsModule,
     DefaultModule,
+    SetupModule,
+    LoginModule,
     ReactiveFormsModule,
     HttpClientModule
   ],
