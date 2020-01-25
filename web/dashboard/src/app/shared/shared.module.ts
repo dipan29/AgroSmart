@@ -6,13 +6,16 @@ import { FooterComponent } from './components/footer/footer.component';
 import { MatDividerModule, MatToolbarModule, MatIconModule, MatButtonModule, MatMenuModule, MatListModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { RouterModule } from '@angular/router';
+import { DataChartsComponent } from './widgets/data-charts/data-charts.component';
+import { HighchartsChartModule } from 'highcharts-angular';
 
 
 @NgModule({
   declarations: [
     HeaderComponent,
     FooterComponent,    
-    SidebarComponent
+    SidebarComponent,
+    DataChartsComponent
   ],
   imports: [
     CommonModule,
@@ -23,12 +26,14 @@ import { RouterModule } from '@angular/router';
     MatMenuModule,
     FlexLayoutModule,
     MatListModule,
-    RouterModule
+    RouterModule,
+    HighchartsChartModule
   ],
   exports: [
     HeaderComponent,
     FooterComponent,
-    SidebarComponent
+    SidebarComponent,
+    DataChartsComponent
   ]
 })
 export class SharedModule { }
