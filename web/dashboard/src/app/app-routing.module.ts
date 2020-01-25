@@ -35,10 +35,10 @@ const routes: Routes = [{
   }]
 }, {
   path: 'login',
-  component: LoginComponent,
+  component: LoginComponent
 }, {
   path: 'setup',
-  component: SetupComponent,
+  component: SetupComponent
 }];
 
 @NgModule({
