@@ -12,6 +12,8 @@ import { HelpComponent } from './modules/help/help.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ApixuService } from './modules/apixu.service';
+import { SetupComponent } from './layouts/setup/setup.component';
+import { LoginComponent } from './modules/login/login.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { ApixuService } from './modules/apixu.service';
     SettingsComponent,
     ControlComponent,
     ContactComponent,
-    HelpComponent
+    HelpComponent,
+    SetupComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
