@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
-import { isNullOrUndefined } from 'util';
 
 @Component({
   selector: 'app-login',
@@ -15,21 +14,24 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  loginUser(event){
+  loginUser(event) {
     event.preventDefault();
     const target = event.target;
     const username = target.querySelector('#username').value
     const password = target.querySelector('#password').value
 
     this.Auth.getUserDetails(username, password).subscribe(data => {
-      if(data.success) {
+      if (data.success) {
+        this.Auth.getUser(username).subscribe(userData => {
+          const name = userData.name;
+          this.Auth.setLoggedIn(true, name, username);
+          console.log(username + " was logged in!", name);
+        })
         this.router.navigate([''])
-        this.Auth.setLoggedIn(true)
-        console.log(username, data.userName)
       } else {
         window.alert(data.message)
+        console.log(username, password)
       }
     })
-    console.log(username, password)
   }
 }

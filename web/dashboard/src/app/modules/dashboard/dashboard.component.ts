@@ -3,6 +3,7 @@ import { Title } from '@angular/platform-browser';
 import { DashboardService } from '../dashboard.service';
 import { ApixuService } from "../apixu.service";
 import { FormBuilder, FormGroup } from "@angular/forms";
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -18,7 +19,13 @@ export class DashboardComponent implements OnInit {
   public weatherData: any;
   public airData: any;
 
-  constructor(private titleService:Title, private dashBoardService:DashboardService, private formBuilder: FormBuilder, private apixuService: ApixuService) {
+  constructor(
+    private titleService:Title, 
+    private dashBoardService:DashboardService, 
+    private formBuilder: FormBuilder, 
+    private apixuService: ApixuService,
+    private authService: AuthService
+    ) {
     this.titleService.setTitle("AgroSmart - DashBoard");
   }
 

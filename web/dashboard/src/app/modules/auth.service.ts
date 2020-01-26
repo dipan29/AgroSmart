@@ -9,18 +9,39 @@ interface myData {
   loginHash: string
 }
 
+interface userData {
+  name: String,
+  email: String,
+  username: String,
+  accessLevel: String,
+  phone: String,
+  lastLogin: String,
+  loginHash: String
+}
+
 @Injectable({
   providedIn: 'root'
 })
 
 export class AuthService {
 
-  private loggedInStatus = false
+  private loggedInStatus = false;
+  private name: any;
+  private email: any;
 
   constructor(private http: HttpClient) { }
 
-  setLoggedIn(value: boolean) {
-    this.loggedInStatus = value
+  setLoggedIn(value: boolean, nameU, emailU) {
+    this.loggedInStatus = value;
+    this.name = nameU;
+    this.email = emailU;
+  }
+
+  getUserName() {
+    return this.name;
+  }
+  getUserEmail() {
+    return this.email;
   }
 
   get isLoggedIn() {
@@ -33,5 +54,9 @@ export class AuthService {
       username,
       password
     })
+  }
+
+  getUser(email) {
+    return this.http.get<userData>('/api/user/'+email)
   }
 }
