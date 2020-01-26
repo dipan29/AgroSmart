@@ -1,16 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { Title }     from '@angular/platform-browser';
+import { HostListener } from "@angular/core";
 
 @Component({
   selector: 'app-default',
   templateUrl: './default.component.html',
   styleUrls: ['./default.component.scss']
 })
+
 export class DefaultComponent implements OnInit {
 
-  sideBarOpen = true;
+  sideBarOpen = false;
 
-  //constructor() { }
+  screenHeight: number;
+  screenWidth: number;
 
   ngOnInit() { }
 
@@ -20,6 +23,16 @@ export class DefaultComponent implements OnInit {
 
   constructor(private titleService:Title) {
     this.titleService.setTitle("AgroSmart - DashBoard");
+    this.getScreenSize();
+
+    if(this.screenWidth > 760)
+      this.sideBarOpen = true;
   }
 
+  @HostListener('window:resize', ['$event'])
+    getScreenSize(event?) {
+          this.screenHeight = window.innerHeight;
+          this.screenWidth = window.innerWidth;
+          console.log(this.screenHeight, this.screenWidth);
+    }
 }

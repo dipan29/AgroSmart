@@ -33,7 +33,7 @@ export class AuthService {
 
   setLoggedIn(value: boolean, nameU, emailU) {
     this.loggedInStatus = value;
-    this.name = nameU;
+    this.name = nameU;    
     this.email = emailU;
   }
 

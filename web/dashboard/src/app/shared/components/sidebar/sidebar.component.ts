@@ -12,8 +12,8 @@ export class SidebarComponent implements OnInit {
   public email: any;
 
   constructor(private authService: AuthService) { 
-    this.uname = this.authService.getUserName();
-    this.email = this.authService.getUserEmail();
+    this.uname = sessionStorage.getItem('username');
+    this.email = sessionStorage.getItem('email');
   }
 
   ngOnInit() {

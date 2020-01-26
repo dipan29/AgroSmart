@@ -10,10 +10,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { ApixuService } from './modules/apixu.service';
 import { SetupModule } from './layouts/setup/setup.module';
 import { LoginComponent } from './modules/login/login.component';
+import { LogoutComponent } from './modules/logout/logout.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,
