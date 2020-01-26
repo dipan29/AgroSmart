@@ -24,8 +24,10 @@ export class LoginComponent implements OnInit {
       if (data.success) {
         this.Auth.getUser(username).subscribe(userData => {
           const name = userData.name.valueOf();
+          const loginHash = userData.loginHash.valueOf();
           sessionStorage.setItem('username', name);
           sessionStorage.setItem('email', username);
+          sessionStorage.setItem('loginHash', loginHash);
           this.Auth.setLoggedIn(true, name, username);
           console.log(username + " was logged in!", name);
         })
