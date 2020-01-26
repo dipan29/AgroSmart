@@ -33,7 +33,7 @@
             ],
             "scripts": []
           },
-          "configurations": {
+          "configurations": {            
             "production": {
               "fileReplacements": [
                 {

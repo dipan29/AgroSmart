@@ -11,10 +11,8 @@ router.post('/send', async (req, res) => {
     const { humidity } = req.body;
     const { waterLevel } = req.body;
     const { moisture } = req.body;
-    const { solarIntensity } = req.body;
+    const { solarIntensity } = req.body || 0;
     
-    if(!solarIntensity)
-        solarIntensity = 0;
 
     try {
         node_data = new Node_data({

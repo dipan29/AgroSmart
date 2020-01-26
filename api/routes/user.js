@@ -48,7 +48,7 @@ router.post('/create', async (req, res) => {
 });
 
 router.post('/login', async (req, res) => {
-    const email = req.body.email;
+    const email = req.body.username;
     const pass = req.body.password;
     //let password = bcrypt.hashSync(pass, saltRounds);
 
