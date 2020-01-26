@@ -6,7 +6,7 @@ import { BrowserModule, Title } from '@angular/platform-browser';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { LoginComponent } from 'src/app/modules/login/login.component';
 import { ConfigComponent } from 'src/app/modules/config/config.component';
-import { MatDrawerContainer, MatDrawerContent, MatDividerModule, MatCardModule, MatSidenavModule, MatSlideToggleModule, MatSelectModule, MatButtonModule } from '@angular/material';
+import { MatDividerModule, MatCardModule, MatSidenavModule, MatSlideToggleModule, MatSelectModule, MatButtonModule } from '@angular/material';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { FlexLayoutModule } from '@angular/flex-layout';
 

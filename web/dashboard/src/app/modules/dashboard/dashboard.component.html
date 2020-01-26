@@ -2,7 +2,7 @@
     <mat-card fxFlex="40">
         <h3>Today's Weather</h3>
         <p>
-            Temperature : {{ this.weatherData?.current.temperature }}°C | Humidity : {{ this.weatherData?.current.humidity }}% | Precipitation : {{ this.weatherData?.current.precip }}%           
+            Temperature : {{ this.weatherData?.current?.temperature }}°C | Humidity : {{ this.weatherData?.current?.humidity || 'NA' }}% | Precipitation : {{ this.weatherData?.current?.precip || '0' }}%           
         <br></p>
         
         <span class="weather-span">Location: {{ searchLocation }}</span>
@@ -11,7 +11,7 @@
     <mat-card fxFlex="60">
         <h3>Today's Air Quality</h3>
         <p>
-            Air Quality Information (AQI) : {{ this.airData?.data.aqi }} | PM2.5 : {{ this.airData?.data.iaqi.pm25.v}} | SPM : {{ this.airData?.data.iaqi.p.v}}
+            Air Quality Information (AQI) : {{ this.airData?.data?.aqi || 'N/A' }} | PM2.5 : {{ this.airData?.data?.iaqi?.pm25?.v || 'N/A'}} | SPM : {{ this.airData?.data?.iaqi?.p?.v || 'N/A'}}
         <br></p>
         <span class="weather-span">Location: {{ searchLocation }} | Index : micro-grams/cubic meter</span>
         <span class="weather-span fr-0">Results Provider : <a href="https://aqicn.org/" target="_blank">Aqicn</a></span>
