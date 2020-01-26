@@ -7,7 +7,6 @@ import { SettingsComponent } from './modules/settings/settings.component';
 import { ControlComponent } from './modules/control/control.component';
 import { ContactComponent } from './modules/contact/contact.component';
 import { HelpComponent } from './modules/help/help.component';
-import { LoginComponent } from './layouts/login/login.component';
 import { SetupComponent } from './layouts/setup/setup.component';
 
 
@@ -33,9 +32,6 @@ const routes: Routes = [{
     path: 'help',
     component: HelpComponent
   }]
-}, {
-  path: 'login',
-  component: LoginComponent
 }, {
   path: 'setup',
   component: SetupComponent

@@ -9,6 +9,8 @@ import { RouterModule } from '@angular/router';
 import { DataChartsComponent } from './widgets/data-charts/data-charts.component';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { CardsComponent } from './widgets/cards/cards.component';
+import { FullcontentComponent } from './components/fullcontent/fullcontent.component';
+import { NlHeaderComponent } from './components/nl-header/nl-header.component';
 
 
 @NgModule({
@@ -17,7 +19,9 @@ import { CardsComponent } from './widgets/cards/cards.component';
     FooterComponent,    
     SidebarComponent,
     DataChartsComponent,
-    CardsComponent
+    CardsComponent,
+    FullcontentComponent,
+    NlHeaderComponent
   ],
   imports: [
     CommonModule,
@@ -36,6 +40,8 @@ import { CardsComponent } from './widgets/cards/cards.component';
     HeaderComponent,
     FooterComponent,
     SidebarComponent,
+    FullcontentComponent,
+    NlHeaderComponent,
     DataChartsComponent,
     CardsComponent
   ]
