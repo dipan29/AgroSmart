@@ -22,7 +22,7 @@ router.post('/create', async (req, res) => {
     try {
         let user = await User.findOne({ email });
 
-        if(user) {
+        if (user) {
             return res.status(409).json('User Already Exists');
         } else {
             user = new User({
@@ -55,25 +55,32 @@ router.post('/login', async (req, res) => {
     try {
         let user = await User.findOne({ email });
 
-        if(user){
-            if(bcrypt.compareSync(pass, user.password)) {
+        if (user) {
+            if (bcrypt.compareSync(pass, user.password)) {
                 const hashKey = shortid.generate();;
-                let loginHash = bcrypt.hashSync(hashKey,saltRounds);
+                let loginHash = bcrypt.hashSync(hashKey, saltRounds);
                 var lastLogin = new Date();
-                let update = await User.updateOne({email},{ $inc: { loginNo : 1}, $set: { loginHash, lastLogin }});
-                if(update) {
+                let update = await User.updateOne({ email }, { $inc: { loginNo: 1 }, $set: { loginHash, lastLogin } });
+                if (update) {
                     var message = "Login Successful!";
-                    var returnJson = ({ message , loginHash });
+                    var success = true;
+                    var returnJson = ({ success, message, loginHash });
                     res.status(200).json(returnJson);
                 } else {
-                    res.status(204).json('Login Successful, but No Hash Set.');
+                    res.status(200).json('Login Successful, but No Hash Set.');
                 }
-                
+
             } else {
-                res.status(401).json('Invalid Password! Try again.');
+                var message = "Invalid Password! Try again.";
+                var success = false;
+                var returnJson = ({ success, message });
+                res.status(200).json(returnJson);
             }
         } else {
-            res.status(404).json('Account Not Found');
+            var message = "Account Not Found";
+            var success = false;
+            var returnJson = ({ success, message });
+            res.status(200).json(returnJson);
         }
     } catch (err) {
         console.error(err);
@@ -86,16 +93,16 @@ router.post('/updateUserName', async (req, res) => {
     const pass = req.body.password;
     const username = req.body.username;
     const password = bcrypt.hashSync(pass, saltRounds);
-    try{
+    try {
         let user = await User.findOne({ email });
 
-        if(user) {
-            if(bcrypt.compareSync(pass, user.password)) {
+        if (user) {
+            if (bcrypt.compareSync(pass, user.password)) {
                 let update = await User.updateOne({ email }, { $set: { username } });
-                if(update) {
+                if (update) {
                     var message = "Username Set Successfully!";
                     var name = user.name;
-                    var returnJson = { message, name, username};
+                    var returnJson = { message, name, username };
                     res.status(200).json(returnJson);
                 } else {
                     res.status(500).json('There was some error.');
@@ -114,9 +121,9 @@ router.post('/updateUserName', async (req, res) => {
 
 router.get('/:username', async (req, res) => {
     try {
-        const user = await User.findOne({ username: req.params.username });
+        const user = await User.findOne({ email: req.params.username });
 
-        if(user) {
+        if (user) {
             /* Create the Required JSON */
             var name = user.name;
             var email = user.email;
@@ -129,7 +136,8 @@ router.get('/:username', async (req, res) => {
             var returnJson = { name, email, username, accessLevel, phone, defaultProperty, lastLogin, loginHash };
             return res.status(200).json(returnJson);
         } else {
-            return res.status(404).json('User not found!');
+            var message = 'User not found!';
+            return res.status(200).json({ message });
         }
     } catch (err) {
         console.error(err);
@@ -142,22 +150,22 @@ router.post('/logout', async (req, res) => {
     const username = req.body.username;
     const loginHash = req.body.loginHash;
 
-    if(email) {
+    if (email) {
         let user = User.findOne({ email });
-        if(user) {
-            if(loginHash == user.loginHash) {
+        if (user) {
+            if (loginHash == user.loginHash) {
                 var loginNo = user.loginNo;
-                if(loginNo == 1 ){
-                    let update = await User.updateOne({email},{ $inc: { loginNo : -1}, $set: { loginHash: null}});
+                if (loginNo == 1) {
+                    let update = await User.updateOne({ email }, { $inc: { loginNo: -1 }, $set: { loginHash: null } });
                     if (update) {
                         res.status(200).json("Logout Successful!");
                     } else {
                         res.status(417)
                     }
                 } else {
-                    let update = await User.updateOne({email},{ $inc: { loginNo : -1} });
+                    let update = await User.updateOne({ email }, { $inc: { loginNo: -1 } });
                 }
-                
+
             }
         }
     }

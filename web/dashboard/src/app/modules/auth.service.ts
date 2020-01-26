@@ -4,7 +4,9 @@ import { HttpClient } from '@angular/common/http';
 
 interface myData {
   success: boolean,
-  message: string
+  message: string,
+  userName: String,
+  loginHash: string
 }
 
 @Injectable({

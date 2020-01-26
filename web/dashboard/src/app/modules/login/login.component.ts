@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
+import { isNullOrUndefined } from 'util';
 
 @Component({
   selector: 'app-login',
@@ -22,8 +23,9 @@ export class LoginComponent implements OnInit {
 
     this.Auth.getUserDetails(username, password).subscribe(data => {
       if(data.success) {
-        this.router.navigate(['dashboard'])
+        this.router.navigate([''])
         this.Auth.setLoggedIn(true)
+        console.log(username, data.userName)
       } else {
         window.alert(data.message)
       }
