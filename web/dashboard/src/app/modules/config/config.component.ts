@@ -33,7 +33,9 @@ export class ConfigComponent implements OnInit {
         var propertyId = data.propertyId.valueOf();
         const dateNow = new Date();
         dateNow.setDate(dateNow.getDate() + 180);
+        this.cookieService.deleteAll();
         this.cookieService.set('propertyId', propertyId, dateNow);
+        this.cookieService.set('location', location, dateNow);
         console.log("Property Created. ID - " + propertyId);
         this.router.navigate([''])
       } else {

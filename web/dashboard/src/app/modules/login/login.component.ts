@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
           this.Auth.setLoggedIn(true, name, username);
           console.log(username + " was logged in!", name);
         })
-        this.router.navigate([''])
+        this.router.navigate(['/setup/config'])
       } else {
         window.alert(data.message)
         console.log(username, password)

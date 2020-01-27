@@ -1,14 +1,20 @@
 import { Injectable } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class DashboardService {
 
-  constructor() { }
+  constructor(private cookieService: CookieService) { }
 
   currentPlace () {
+    if(this.cookieService.get('location')) {
+      return [this.cookieService.get('location')];
+    } else {
     return ['Kolkata'];
+    }
   }
   currentLatitude(){
     return ["22.570"]
