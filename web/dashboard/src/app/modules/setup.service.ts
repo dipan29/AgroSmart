@@ -9,6 +9,15 @@ interface propertyData {
   propertyId: string
 }
 
+interface properties {
+  [index: number]: {
+    propertyName: string;
+    propertyId: string;
+    uniqueCode: string;
+    location: string
+  }
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -16,7 +25,7 @@ export class SetupService {
 
   constructor(private http: HttpClient, private cookieService: CookieService) { }
 
-  getPropertyId(){
+  getPropertyId() {
     var propertyId = this.cookieService.get('propertyId');
     return propertyId;
   }
@@ -27,4 +36,11 @@ export class SetupService {
       propertyName, uniqueCode, location, latitude, longitude, elevation, area, adminName
     })
   }
+
+  getProperties(adminName) {
+    return this.http.post('/api/property/getProperties', {
+      adminName
+    })
+  }
+
 }

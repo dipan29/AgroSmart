@@ -76,7 +76,7 @@ router.post('/update', async (req, res) => {
             if(mode == "P" && uniqueCode == property.uniqueCode) {
                 let update = await Property.updateOne({ propertyId }, { $set: { latitude, longitude, elevation, area } });
                 if(update) {
-                    var message = "Updae Successfully!";                    
+                    var message = "Update Successfully!";                    
                     var returnJson = { message, name };
                     res.status(200).json(returnJson);
                 } else {
@@ -97,6 +97,26 @@ router.post('/update', async (req, res) => {
         } else {
             res.status(404).json('Property not Found! Try Again');
         }
+    } catch (err) {
+        console.error(err);
+        res.status(500).json('Internal Server Error');
+    }
+});
+
+router.post('/getProperties', async (req, res) => {
+    const {adminName} = req.body;
+
+    var propertyDetails = [];
+    try {
+        Property.find({ adminName } , function(err, nodes, next) {
+            if(err){
+                res.status(500).json('Some Error Occured');
+                console.log(err);
+                next();
+            }
+            propertyDetails.push(nodes);
+            res.status(200).json( { propertyDetails });
+        }).select("propertyName propertyId uniqueCode location");            
     } catch (err) {
         console.error(err);
         res.status(500).json('Internal Server Error');

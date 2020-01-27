@@ -10,6 +10,7 @@ import { MatDividerModule, MatCardModule, MatSidenavModule, MatSlideToggleModule
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CookieService } from 'ngx-cookie-service';
+import { SelectPropertyComponent } from 'src/app/modules/select-property/select-property.component';
 
 
 
@@ -17,7 +18,8 @@ import { CookieService } from 'ngx-cookie-service';
   declarations: [
     SetupComponent,
     LoginComponent,
-    ConfigComponent
+    ConfigComponent,
+    SelectPropertyComponent
   ],
   imports: [
     CommonModule,

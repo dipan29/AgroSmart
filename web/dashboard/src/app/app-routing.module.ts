@@ -10,6 +10,7 @@ import { HelpComponent } from './modules/help/help.component';
 import { SetupComponent } from './layouts/setup/setup.component';
 import { LoginComponent } from './modules/login/login.component';
 import { ConfigComponent } from './modules/config/config.component';
+import { SelectPropertyComponent } from './modules/select-property/select-property.component';
 
 
 const routes: Routes = [{
@@ -44,6 +45,9 @@ const routes: Routes = [{
     }, {
       path: 'config',
       component: ConfigComponent
+    }, {
+      path: 'selectProperty',
+      component: SelectPropertyComponent
     }
   ]
 }];
