@@ -22,7 +22,7 @@ export class SelectPropertyComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    const adminName = 'dipanroy12@gmail.com';
+    const adminName = this.cookieService.get('user_email').replace(/%40/g,"@");;
     this.Setup.getProperties(adminName).subscribe(data => {
       this.properties = data["propertyDetails"]["0"];
     });

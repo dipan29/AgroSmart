@@ -1,5 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
+
 
 @Component({
   selector: 'app-header',
@@ -10,13 +12,20 @@ export class HeaderComponent implements OnInit {
 
   @Output() toogleSideBarForMe: EventEmitter<any> = new EventEmitter();
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private cookieService: CookieService) { }
 
   ngOnInit() {  }
 
   logout(){
     sessionStorage.clear();
+    this.cookieService.delete('user_email');
     this.router.navigateByUrl('/setup');
+  }
+
+  settings(){    
+    this.cookieService.delete('propertyId');
+    this.cookieService.delete('controllerId');
+    this.router.navigateByUrl('/setup/selectProperty');
   }
 
   toogleSideBar() {

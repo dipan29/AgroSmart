@@ -29,16 +29,22 @@ export class LoginComponent implements OnInit {
           const loginHash = userData.loginHash.valueOf();
           sessionStorage.setItem('username', name);
           sessionStorage.setItem('email', username);
+
+          const dateNow = new Date();
+          dateNow.setDate(dateNow.getDate() + 30);
+          this.cookieService.delete('user_email');
+          this.cookieService.set('user_email', username, dateNow);
+
           sessionStorage.setItem('loginHash', loginHash);
           this.Auth.setLoggedIn(true, name, username);
           console.log(username + " was logged in!", name);
         })
-        if(this.cookieService.get('propertyId')) {
+        if (this.cookieService.get('propertyId')) {
           this.router.navigate([''])
         } else {
           this.router.navigate(['/setup/selectProperty'])
         }
-        
+
       } else {
         window.alert(data.message)
         console.log(username, password)
