@@ -18,7 +18,7 @@ router.get('/:id', async (req, res) => {
             var relay4 = controller.relay4;
             var servo1 = controller.servo1;
             var solarIntensity = controller.solarIntensity;
-            if(!solarIntensity)
+            if (!solarIntensity)
                 solarIntensity = 0;
             var lastChangedTime = controller.lastChangedTime;
             var returnJson = { controllerID, relay1, relay2, relay3, relay4, servo1, solarIntensity, lastChangedTime };
@@ -33,28 +33,36 @@ router.get('/:id', async (req, res) => {
 });
 
 router.post('/create', async (req, res) => {
-    const propertyID = req.body.propertyID;
+    const propertyID = req.body.propertyId;
     const controllerType = req.body.controllerType;
-   
+    // let controllerID = shortid.generate();;
+    const controllerID = req.body.controllerId;
+    let controllerId = controllerID;
+
     try {
-        let controllerID = shortid.generate();;        
-        var createTime = new Date();
-        let controller = new Controller({
-            propertyID,
-            controllerID,
-            controllerType,
-            relay1: 0,
-            relay2: 0,
-            relay3: 0,
-            relay4: 0,
-            servo1: 90,
-            solarIntensity: 0,
-            createTime
-        });
+        let controller = await Controller.findOne({ controllerID });
+        var success = true,
+        if (controller) {
+            res.status(200).json({ success, controllerId })
+        } else {
+            var createTime = new Date();
+            let controller = new Controller({
+                propertyID,
+                controllerID,
+                controllerType,
+                relay1: 0,
+                relay2: 0,
+                relay3: 0,
+                relay4: 0,
+                servo1: 90,
+                solarIntensity: 0,
+                createTime
+            });
 
-        await controller.save();
-        res.json(controller);
-
+            await controller.save();
+            res.status(200).json({ success, controllerId })
+            //res.json(controller);
+        }
     } catch (err) {
         console.error(err);
         res.status(500).json('Server Error');
@@ -69,11 +77,11 @@ router.post('/update', async (req, res) => {
     const { relay4 } = req.body;
     const { servo1 } = req.body;
 
-    try{
+    try {
         let controller = await Controller.findOne({ controllerID });
-        if(controller) {
+        if (controller) {
             let update = await Controller.updateOne({ controllerID }, { $set: { relay1, relay2, relay3, relay4, servo1 } });
-            if(update){
+            if (update) {
                 res.status(200).json('Controller Status Update, Acknoledged!');
             } else {
                 res.status(502).json('There was some error!');
@@ -84,7 +92,7 @@ router.post('/update', async (req, res) => {
     } catch (err) {
         console.error(err);
         res.status(500).json('Internal Server Error');
-    }    
+    }
 });
 
 router.post('/solar', async (req, res) => {
@@ -93,9 +101,9 @@ router.post('/solar', async (req, res) => {
 
     try {
         let controller = await Controller.findOne({ controllerID });
-        if(controller) {
+        if (controller) {
             let update = await Controller.updateOne({ controllerID }, { $set: { solarIntensity } });
-            if(update){
+            if (update) {
                 res.status(200).json('Solar Intensity Status Update, Acknoledged!');
             } else {
                 res.status(502).json('There was some error!');

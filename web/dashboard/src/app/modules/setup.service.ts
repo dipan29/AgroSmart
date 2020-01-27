@@ -18,6 +18,11 @@ interface properties {
   }
 }
 
+interface controller {
+  success: boolean;
+  controllerId: string
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -40,6 +45,12 @@ export class SetupService {
   getProperties(adminName) {
     return this.http.post('/api/property/getProperties', {
       adminName
+    })
+  }
+
+  setupController(propertyID, controllerID){
+    return this.http.post<controller>('/api/controller/create', {
+      propertyID, controllerID
     })
   }
 

@@ -8,12 +8,15 @@
         <form class="setup-form" (submit)="setupApp($event)">
             
             <mat-form-field class="form-full-width">
-                <mat-label>Select Property</mat-label>
-                <mat-select>
+                <mat-label>Select Default Property</mat-label>
+                <mat-select id="propertyId" required>
                     <mat-option *ngFor="let property of properties" [value]="property.propertyId">
                         {{ property.propertyName }} - {{ property.uniqueCode }} | {{ property.location }}
                     </mat-option>
                 </mat-select>
+            </mat-form-field>
+            <mat-form-field class="form-full-width">
+                <input matInput placeholder="Controller ID (Check the Back of Controller)" type="text" id="controllerId" required>
             </mat-form-field>
 
             <div class="container-row">
