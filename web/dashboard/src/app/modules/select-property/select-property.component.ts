@@ -43,11 +43,16 @@ export class SelectPropertyComponent implements OnInit {
     //const propertyID = target.querySelector('#propertyId').selected;
     const propertyID = this.propertyID;
     const controllerID = target.querySelector('#controllerId').value;
+    const location = target.querySelector('#location').value;
 
     const dateNow = new Date();
     dateNow.setDate(dateNow.getDate() + 180);
     this.cookieService.delete('propertyId');
     this.cookieService.set('propertyId', propertyID, dateNow);
+
+    this.cookieService.delete('location');
+    this.cookieService.set('location', location, dateNow);
+
     this.cookieService.set('controllerId', controllerID, dateNow);
     console.log(controllerID, propertyID);
     
