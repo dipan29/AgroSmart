@@ -5,7 +5,7 @@
 <br>
 <div class="card-content">
     <div class="container">
-        <form class="setup-form">
+        <form class="setup-form" (submit)="setupApp($event)">
             <mat-form-field class="form-full-width">
                 <input matInput placeholder="Property Name" type="text" id="name" required>
             </mat-form-field>

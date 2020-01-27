@@ -9,6 +9,7 @@ import { ConfigComponent } from 'src/app/modules/config/config.component';
 import { MatDividerModule, MatCardModule, MatSidenavModule, MatSlideToggleModule, MatSelectModule, MatButtonModule, MatInputModule } from '@angular/material';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { CookieService } from 'ngx-cookie-service';
 
 
 
@@ -36,7 +37,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatFormFieldModule
   ],
   providers: [
-    Title
+    Title,
+    CookieService
   ]
 })
 export class SetupModule { }

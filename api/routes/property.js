@@ -21,7 +21,10 @@ router.post('/create', async (req, res) => {
         let property = await Property.findOne({ uniqueCode });
 
         if(property) {
-            return res.status(409).json('Prpperty Unique Identifier Already Exists');
+            var message = 'Prpperty Unique Identifier Already Exists';
+            var success = true;
+            // var propertyId = property.propertyId;            
+            return res.status(200).json({ success, message, propertyId });
         } else {
             property = new Property({
                 propertyId,
@@ -37,12 +40,17 @@ router.post('/create', async (req, res) => {
             });
 
             await property.save();
-
-            res.json(property);
+            var message = 'Property has been created successfully';
+            var success = true;
+            // var propertyId = property.propertyId;
+            res.json({ success, message, propertyId});
         }
     } catch (err) {
         console.error(err);
-        res.status(500).json('Server Error! Please Try Again Later.');
+        var message = 'Server Error! Please Try Again Later.';
+        var success = false;
+        propertyId = 0;
+        res.status(200).json({ success, message, propertyId});
     }
 
 });

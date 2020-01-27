@@ -13,7 +13,7 @@ import { SettingsComponent } from 'src/app/modules/settings/settings.component';
 import { ControlComponent } from 'src/app/modules/control/control.component';
 import { ContactComponent } from 'src/app/modules/contact/contact.component';
 import { HelpComponent } from 'src/app/modules/help/help.component';
-
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -38,6 +38,7 @@ import { HelpComponent } from 'src/app/modules/help/help.component';
   ],
   providers: [
     DashboardService,
+    CookieService,
     Title
   ],
 })
