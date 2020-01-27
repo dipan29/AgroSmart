@@ -9,7 +9,7 @@
             
             <mat-form-field class="form-full-width">
                 <mat-label>Select Default Property</mat-label>
-                <mat-select id="propertyId" required>
+                <mat-select name="propertyId" [(ngModel)]="selectedValue" (selectionChange)="changeP($event.value)">
                     <mat-option *ngFor="let property of properties" [value]="property.propertyId">
                         {{ property.propertyName }} - {{ property.uniqueCode }} | {{ property.location }}
                     </mat-option>

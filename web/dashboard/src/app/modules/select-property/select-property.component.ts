@@ -12,6 +12,7 @@ import { CookieService } from 'ngx-cookie-service';
 export class SelectPropertyComponent implements OnInit {
 
   properties: any;
+  propertyID: string;
 
   constructor(
     private router: Router,
@@ -31,28 +32,35 @@ export class SelectPropertyComponent implements OnInit {
     this.router.navigateByUrl('/setup/config');
   };
 
+  changeP(data) {
+    this.propertyID = data;
+    console.log("Property ID Selected : " + data);
+  }
+
   setupApp(event) {
     event.preventDefault();
     const target = event.target;
-    const propertyId = target.querySelector('#propertyId').value;
-    const controllerId = target.querySelector('#controllerId').value;
+    //const propertyID = target.querySelector('#propertyId').selected;
+    const propertyID = this.propertyID;
+    const controllerID = target.querySelector('#controllerId').value;
 
     const dateNow = new Date();
     dateNow.setDate(dateNow.getDate() + 180);
     this.cookieService.delete('propertyId');
-    this.cookieService.set('propertyId', propertyId, dateNow);
-    this.cookieService.set('controllerId', controllerId, dateNow);
-
-    this.Setup.setupController(propertyId, controllerId).subscribe(data => {
+    this.cookieService.set('propertyId', propertyID, dateNow);
+    this.cookieService.set('controllerId', controllerID, dateNow);
+    console.log(controllerID, propertyID);
+    
+    this.Setup.setupController(propertyID, controllerID).subscribe(data => {
       if(data.success) {
         //var controllerId = data.controllerId.valueOf();
-        console.log("Controller Attached. ID - " + controllerId);
+        console.log("Controller Attached. ID - " + controllerID);
         this.router.navigate([''])
       } else {
         window.alert("Some error occured! Please try again later.")
       }
     })
-
+    
   }
 
 }

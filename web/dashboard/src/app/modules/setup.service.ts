@@ -30,6 +30,7 @@ export class SetupService {
 
   constructor(private http: HttpClient, private cookieService: CookieService) { }
 
+
   getPropertyId() {
     var propertyId = this.cookieService.get('propertyId');
     return propertyId;
@@ -48,9 +49,10 @@ export class SetupService {
     })
   }
 
-  setupController(propertyID, controllerID){
+  setupController(propertyId, controllerId){
+    var controllerType = 'AG Smart Controller';
     return this.http.post<controller>('/api/controller/create', {
-      propertyID, controllerID
+      propertyId, controllerId, controllerType
     })
   }
 

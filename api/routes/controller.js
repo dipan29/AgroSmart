@@ -41,7 +41,7 @@ router.post('/create', async (req, res) => {
 
     try {
         let controller = await Controller.findOne({ controllerID });
-        var success = true,
+        var success = true;
         if (controller) {
             res.status(200).json({ success, controllerId })
         } else {
