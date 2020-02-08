@@ -1,0 +1,8 @@
+POST http://localhost:7988/controller/create
+Content-Type: application/json
+
+{
+    "propertyId": "123456",
+    "controllerType": "ABC",
+    "controllerId": "122333"
+}
