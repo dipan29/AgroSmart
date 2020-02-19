@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const controlSchema = new mongoose.Schema({
     propertyID: {type: String, default: 0},
     controllerID: String,
-    controllerType: {type: String, default: "ESP32"},
+    controllerType: {type: String, default: "ESP8266"},
     relay1: Number, // 0 - Off; 1 - On
     relay2: Number,
     relay3: Number,

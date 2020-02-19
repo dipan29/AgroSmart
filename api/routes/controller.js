@@ -17,14 +17,28 @@ router.get('/:id', async (req, res) => {
             var relay3 = controller.relay3;
             var relay4 = controller.relay4;
             var servo1 = controller.servo1;
-            var solarIntensity = controller.solarIntensity;
-            if (!solarIntensity)
-                solarIntensity = 0;
+            var solarIntensity = controller.solarIntensity||0;
+
             var lastChangedTime = controller.lastChangedTime;
             var returnJson = { controllerID, relay1, relay2, relay3, relay4, servo1, solarIntensity, lastChangedTime };
             return res.status(200).json(returnJson);
         } else {
-            return res.status(404).json('Controller ID not found!');
+            var createTime = new Date();
+            var controllerID = req.params.id;
+            let controller = new Controller({
+                propertyID: "UNSET",
+                controllerID,
+                relay1: 0,
+                relay2: 0,
+                relay3: 0,
+                relay4: 0,
+                servo1: 90,
+                solarIntensity: 0,
+                createTime
+            });
+            await controller.save();
+            var returnJson = { controllerID:req.params.id, relay1:0, relay2:0, relay3:0, relay4:0, servo1:90};
+            return res.status(200).json(returnJson);
         }
     } catch (err) {
         console.error(err);
@@ -32,6 +46,7 @@ router.get('/:id', async (req, res) => {
     }
 });
 
+// #Depricated : Implemented creation in the get method to avoid object absence check/conflicts
 router.post('/create', async (req, res) => {
     const propertyID = req.body.propertyId;
     const controllerType = req.body.controllerType;
