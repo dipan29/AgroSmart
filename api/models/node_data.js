@@ -2,15 +2,19 @@
 const mongoose = require('mongoose');
 
 const dataSchema = new mongoose.Schema({
-    propertyID: String,
+    propertyID: {type: String, default:"UNSET"},
     deviceID: String,
-    deviceType: { type: String, default: "POD" },
-    humidity: Number,
-    waterLevel: Number,
-    temperature: Number,
-    moisture: Number,
-    solarIntensity: { type: Number, defaul: null },
-    dateTime: { type: Date, default: Date.now }
+    deviceType: { type: String, default: "Node"},
+    sensorData: [
+        { 
+          temp: Number,
+          humidity: Number,
+          moisture: Number,
+          solarIntensity: {type: Number, default: 0},
+          waterLevel: {type: Number, default: 0},
+          timeStamp: {type: Date, default: Date.now}
+        }
+      ],
 },{
   collection: 'node_data',
 });
