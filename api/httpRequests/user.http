@@ -1,7 +1,7 @@
-POST http://localhost:7988/user/login
+POST http://hs1.mindwebs.org:7988/user/login
 Content-Type: application/json
 
 {
-    "username": "dipanroy@mindwebs.org",
+    "username": "dipanroy12@gmail.com",
     "password": "123456"
 }
