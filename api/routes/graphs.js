@@ -59,16 +59,17 @@ router.post('/node', async (req, res) => {
     }
     var nodeDetails = [];
     try {
-        Node_data.find({ deviceID, dateTime: { $gte: startDateTime, $lt: endDateTime } } , function(err, nodes, next) {
+        Node_data.find({ deviceID } , function(err, nodes, next) {
             if(err){
                 res.status(500).json('Some Error Occured');
                 console.log(err);
                 next();
             }
             nodeDetails.push(nodes);
+            //nodeDetails = Node_data.sensorData;
             var message = "Data for Node ID : " + deviceID;
             res.status(200).json( { message, nodeDetails });
-        }).select(params + " dateTime");
+        }).select("sensorData");
     } catch (err) {
         console.error(err);
         res.status(500).json('Some error occured!');
@@ -89,7 +90,7 @@ router.post('/data', async (req, res) => {
     }
     var nodeDetails = [];
     try {
-        Node_data.find({ propertyID, dateTime: { $gte: startDateTime, $lt: endDateTime } } , function(err, nodes, next) {
+        Node_data.find({ propertyID } , function(err, nodes, next) {
             if(err){
                 res.status(500).json('Some Error Occured');
                 console.log(err);
@@ -98,7 +99,7 @@ router.post('/data', async (req, res) => {
             nodeDetails.push(nodes);
             var message = params + " data for Property ID : " + propertyID;
             res.status(200).json( { message, nodeDetails });
-        }).select(params + " deviceID dateTime");
+        }).select("sensorData deviceID");
     } catch (err) {
         console.error(err);
         res.status(500).json('Some error occured!');
