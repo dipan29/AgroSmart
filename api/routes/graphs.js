@@ -97,7 +97,7 @@ router.post('/data', async (req, res) => {
                 next();
             }
             nodeDetails.push(nodes);
-            var message = params + " data for Property ID : " + propertyID;
+            var message = " data for Property ID : " + propertyID;
             res.status(200).json( { message, nodeDetails });
         }).select("sensorData deviceID");
     } catch (err) {

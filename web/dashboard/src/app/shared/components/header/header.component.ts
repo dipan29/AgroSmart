@@ -23,7 +23,7 @@ export class HeaderComponent implements OnInit {
   }
 
   settings(){    
-    this.cookieService.delete('propertyId');
+    //this.cookieService.delete('propertyId');
     this.cookieService.delete('controllerId');
     this.router.navigateByUrl('/setup/selectProperty');
   }

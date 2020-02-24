@@ -1,5 +1,11 @@
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
+import { HttpClient } from '@angular/common/http';
+
+interface nodeData {
+  message: string,
+  nodeDetails: any
+}
 
 
 @Injectable({
@@ -7,7 +13,23 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class DashboardService {
 
-  constructor(private cookieService: CookieService) { }
+  constructor(private cookieService: CookieService, private http: HttpClient) { }
+
+  getPropertyId() {
+    var propertyId = this.cookieService.get('propertyId');
+    return propertyId;
+  }
+
+  getNodeData() {
+    var propertyID = this.cookieService.get('propertyId');
+    //var propertyID = "6-YaNQcL";
+    if(propertyID) {
+      console.log("Data for Property ID -  " + this.cookieService.get('propertyId'));
+      return this.http.post<nodeData>('/api/graphs/data', {
+        propertyID
+      })
+    } 
+  }
 
   currentPlace () {
     if(this.cookieService.get('location')) {

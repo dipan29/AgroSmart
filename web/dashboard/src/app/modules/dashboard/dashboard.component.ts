@@ -12,12 +12,15 @@ import { AuthService } from '../auth.service';
 })
 export class DashboardComponent implements OnInit {
 
-  bigChart = []
+  bigChart = [];
+  chartsData = [];
   searchLocation = [];
   
   public weatherSearchForm: FormGroup;
   public weatherData: any;
   public airData: any;
+
+  nodeData: [];
 
   constructor(
     private titleService:Title, 
@@ -30,8 +33,7 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.bigChart = this.dashBoardService.bigChart();
-    console.log(this.bigChart);
+    
     this.searchLocation = this.dashBoardService.currentPlace();
 
     this.apixuService
@@ -46,6 +48,25 @@ export class DashboardComponent implements OnInit {
         this.airData = data;
         console.log(this.airData);
       });
+    
+    this.dashBoardService
+      .getNodeData()
+      .subscribe(data => {
+        if(data.message) {
+          this.nodeData = data.nodeDetails;
+          console.log(this.nodeData);
+        }
+    });
+
+    
+      // console.log("Extracting Layer Data");
+      // var deviceID = JSON.parse({ this.nodeData });
+      // console.log("First Device ID " + deviceID);
+    
+
+    this.bigChart = this.dashBoardService.bigChart();
+    console.log(this.bigChart);
+    
   }
     
 
