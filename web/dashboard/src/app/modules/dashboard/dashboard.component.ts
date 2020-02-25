@@ -21,7 +21,7 @@ export class DashboardComponent implements OnInit {
   public weatherData: any;
   public airData: any;
 
-  nodeData: [];
+  nodeData = [];
 
   constructor(
     private titleService:Title, 
@@ -48,38 +48,13 @@ export class DashboardComponent implements OnInit {
         this.airData = data;
         console.log(this.airData);
       });
-    
-    this.dashBoardService
-      .getNodeData()
-      .subscribe(data => {
-        if(data.message) {
-          this.nodeData = data.nodeDetails;
-          console.log(this.nodeData);
 
-
-          console.log("Extracting Layer Data");
-
-          var x: any;
-          var newData : Object = this.nodeData;
-          newData = newData[0];
-          console.log(newData);
-          for (x in newData) {
-            let y: any;
-            var objData = newData[x].sensorData;
-            for(y in objData) {
-              var temp = objData[y].temp;
-              var time = objData[y].timeStamp;
-              if(temp) 
-                console.log("Temperature " + temp + " Time : " + time); 
-            }
-            
-          }
-      }
-    });
-
-    
-
-
+    let today = new Date();
+    let back = new Date();
+    back.setDate(back.getDate() - 10);
+    this.nodeData = this.graphService.getNodeData("Temperature", back.toISOString() , today.toISOString());
+    console.log(this.nodeData[0]);
+      
     this.bigChart = this.dashBoardService.bigChart();
     console.log(this.bigChart);
     
