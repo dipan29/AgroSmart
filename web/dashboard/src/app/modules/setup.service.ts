@@ -18,6 +18,11 @@ interface properties {
   }
 }
 
+interface nodeDetails {
+  message: string,
+  success: string
+}
+
 interface controller {
   success: boolean;
   controllerId: string
@@ -49,11 +54,16 @@ export class SetupService {
     })
   }
 
-  setupController(propertyId, controllerId){
+  setupController(propertyId, controllerId) {
     var controllerType = 'AG Smart Controller';
     return this.http.post<controller>('/api/controller/create', {
       propertyId, controllerId, controllerType
     })
   }
 
+  setNodeDetails(propertyID, deviceID) {
+    return this.http.post<nodeDetails>('/api/node_data/setNode', {
+      propertyID, deviceID
+    })
+  }
 }
