@@ -3,8 +3,8 @@ import { CookieService } from 'ngx-cookie-service';
 import { HttpClient } from '@angular/common/http';
 
 interface nodeData {
-  message: string,
-  nodeDetails: any
+  message: string;
+  nodeDetails: any;
 }
 
 
@@ -16,7 +16,7 @@ export class DashboardService {
   constructor(private cookieService: CookieService, private http: HttpClient) { }
 
   getPropertyId() {
-    var propertyId = this.cookieService.get('propertyId');
+    const propertyId = this.cookieService.get('propertyId');
     return propertyId;
   }
 
