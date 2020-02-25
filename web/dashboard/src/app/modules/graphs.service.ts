@@ -52,7 +52,7 @@ export class GraphsService {
           deviceIDs.push(deviceID);
           var paramsValue = []; var values = []; var dates = [];
           var objData = newData[x].sensorData;
-          var datePointer;
+          var datePointer = '';
           //var count = Object.keys(objData).length;
           var count = 0, k = 0;
           datePointer = objData[0].timeStamp.substring(0, 10);

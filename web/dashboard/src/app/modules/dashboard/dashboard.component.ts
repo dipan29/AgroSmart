@@ -51,10 +51,10 @@ export class DashboardComponent implements OnInit {
 
     let today = new Date();
     let back = new Date();
-    back.setDate(back.getDate() - 10);
+    back.setDate(back.getDate() - 30);
     this.nodeData = this.graphService.getNodeData("Temperature", back.toISOString() , today.toISOString());
     console.log(this.nodeData[0]);
-      
+
     this.bigChart = this.dashBoardService.bigChart();
     console.log(this.bigChart);
     
