@@ -5,7 +5,7 @@ import { DashboardComponent } from 'src/app/modules/dashboard/dashboard.componen
 import { RouterModule } from '@angular/router';
 import { StatsComponent } from 'src/app/modules/stats/stats.component';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { MatSidenavModule, MatDividerModule, MatCardModule, MatSlideToggleModule } from '@angular/material';
+import { MatSidenavModule, MatDividerModule, MatCardModule, MatSlideToggleModule, MatButtonModule, MatFormFieldModule, MatInputModule } from '@angular/material';
 import { BrowserModule, Title }  from '@angular/platform-browser';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { DashboardService } from 'src/app/modules/dashboard.service';
@@ -14,6 +14,8 @@ import { ControlComponent } from 'src/app/modules/control/control.component';
 import { ContactComponent } from 'src/app/modules/contact/contact.component';
 import { HelpComponent } from 'src/app/modules/help/help.component';
 import { CookieService } from 'ngx-cookie-service';
+import { SelectPropertyComponent } from 'src/app/modules/select-property/select-property.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,10 @@ import { CookieService } from 'ngx-cookie-service';
     BrowserModule,
     FlexLayoutModule,
     MatCardModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatButtonModule
   ],
   providers: [
     DashboardService,

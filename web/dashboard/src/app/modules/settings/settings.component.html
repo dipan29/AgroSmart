@@ -1,1 +1,25 @@
-<p>settings works!</p>
+<div class="row text-center">
+    <h3>Smart POD Configuration</h3>
+</div>
+<br>
+<div class="card-content">
+    <div class="container">
+        <p>Please Enter the Device ID. Check at the back of your node for Device ID.</p>
+        <form class="setup-form" (submit)="setupNode($event)">
+            <mat-form-field class="form-full-width">
+                <input matInput placeholder="Device Identifier" type="text" id="deviceID" required>
+            </mat-form-field>
+
+            <br /> &nbsp; <br />
+            <div class="container-row">
+                <div>
+                    <button type="submit" mat-raised-button color="primary" id="submit">Confirm Details</button>
+                
+                &nbsp;  &nbsp;
+                
+                    <button type="reset" mat-raised-button color="accent" id="reset">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
