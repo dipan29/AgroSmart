@@ -4,6 +4,7 @@ import { DashboardService } from '../dashboard.service';
 import { ApixuService } from "../apixu.service";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { AuthService } from '../auth.service';
+import { GraphsService } from '../graphs.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -25,9 +26,8 @@ export class DashboardComponent implements OnInit {
   constructor(
     private titleService:Title, 
     private dashBoardService:DashboardService, 
-    private formBuilder: FormBuilder, 
     private apixuService: ApixuService,
-    private authService: AuthService
+    private graphService: GraphsService
     ) {
     this.titleService.setTitle("AgroSmart - DashBoard");
   }
@@ -55,14 +55,30 @@ export class DashboardComponent implements OnInit {
         if(data.message) {
           this.nodeData = data.nodeDetails;
           console.log(this.nodeData);
-        }
+
+
+          console.log("Extracting Layer Data");
+
+          var x: any;
+          let newData: Object;
+          newData = this.nodeData[0];
+          console.log(newData);
+          for (x in newData) {
+            let y: any;
+            var objData = newData[x].sensorData;
+            for(y in objData) {
+              var temp = objData[y].temp;
+              var time = objData[y].timeStamp;
+              if(temp) 
+                console.log("Temperature " + temp + " Time : " + time); 
+            }
+            
+          }
+      }
     });
 
     
-      // console.log("Extracting Layer Data");
-      // var deviceID = JSON.parse({ this.nodeData });
-      // console.log("First Device ID " + deviceID);
-    
+
 
     this.bigChart = this.dashBoardService.bigChart();
     console.log(this.bigChart);
