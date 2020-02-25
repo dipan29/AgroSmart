@@ -56,7 +56,7 @@ router.post('/send', async (req, res) => {
 
 router.post('/setNode', async (req, res) => {
     const { deviceID } = req.body;
-    const { deviceType } = req.body;
+    let { deviceType } = req.body;
     let { propertyID } = req.body;
 
     if (!deviceType)

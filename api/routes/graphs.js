@@ -80,7 +80,7 @@ router.post('/data', async (req, res) => {
                     ]
                 });
                 node.sensorData.forEach(dataPack => {
-                    let last = graphData[graphData.length-1]
+                    let last = graphData[graphData.length-1];
                     last.sensorGraph[0].data.push(dataPack.temp);
                     last.sensorGraph[1].data.push(dataPack.humidity);
                     last.sensorGraph[2].data.push(dataPack.moisture);

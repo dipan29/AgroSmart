@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Title }     from '@angular/platform-browser';
-import { HostListener } from "@angular/core";
+import { Title } from '@angular/platform-browser';
+import { HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-default',
@@ -21,12 +21,13 @@ export class DefaultComponent implements OnInit {
     this.sideBarOpen = !this.sideBarOpen;
   }
 
-  constructor(private titleService:Title) {
-    this.titleService.setTitle("AgroSmart - DashBoard");
+  constructor(private titleService: Title) {
+    this.titleService.setTitle('AgroSmart - DashBoard');
     this.getScreenSize();
 
-    if(this.screenWidth > 760)
+    if (this.screenWidth > 760) {
       this.sideBarOpen = true;
+    }
   }
 
   @HostListener('window:resize', ['$event'])

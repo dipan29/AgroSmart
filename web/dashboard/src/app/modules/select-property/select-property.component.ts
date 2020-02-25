@@ -13,7 +13,8 @@ export class SelectPropertyComponent implements OnInit {
 
   properties: any;
   propertyID: string;
-
+  selectedValue: any;
+  
   constructor(
     private router: Router,
     private cookieService: CookieService,
