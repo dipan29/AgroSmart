@@ -14,7 +14,7 @@ export class GraphsService {
 
   constructor(private cookieService: CookieService, private http: HttpClient) { }
 
-  getNodeData() {
+  getData() {
     var propertyID = this.cookieService.get('propertyId');
     //var propertyID = "6-YaNQcL";
     if(propertyID) {
@@ -24,4 +24,5 @@ export class GraphsService {
       })
     } 
   }
+  
 }

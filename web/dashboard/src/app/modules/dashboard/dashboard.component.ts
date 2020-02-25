@@ -60,8 +60,8 @@ export class DashboardComponent implements OnInit {
           console.log("Extracting Layer Data");
 
           var x: any;
-          let newData: Object;
-          newData = this.nodeData[0];
+          var newData : Object = this.nodeData;
+          newData = newData[0];
           console.log(newData);
           for (x in newData) {
             let y: any;
