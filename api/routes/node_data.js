@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const Node_data = require('../models/Node_data');
+const Controller = require('../models/Controller');
 
 router.post('/send', async (req, res) => {
     const { deviceID } = req.body;
@@ -68,7 +69,8 @@ router.post('/setNode', async (req, res) => {
         // Update the sensor bundle is the device exists
         try {
             let update = await Node_data.updateOne({ deviceID }, { $set: { propertyID, deviceType } });
-            if (update) {
+            let update2 = await Controller.updateOne({ controllerID }, { $set: { propertyID, controllerType } });
+            if (update && update2) {
                 var message = "Node has been sucessfully added";
                 var success = true;
                 var returnJson = ({ success, message });

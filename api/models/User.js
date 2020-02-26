@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema({
   accessLevel: String,
   lastLogin: { type: Date, default: null },
   loginNo: { type: Number, default: 0},
-  defaultProperty: Number,
+  defaultProperty: String,
   defaultTimeOut: Number,
   loginHash: {type: String, default: null},
   createDate: { type: Date, default: Date.now }
