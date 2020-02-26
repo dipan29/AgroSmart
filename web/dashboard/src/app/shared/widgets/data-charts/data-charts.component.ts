@@ -22,10 +22,10 @@ export class DataChartsComponent implements OnInit {
       type: 'line'
     },
     title: {
-      text: this.title || 'Average Data'
+      text: this.title || 'Parameters vs Timestamp Plot'
     },
     subtitle: {
-      text: this.subtitle || 'For the Month of January 2020'
+      text: this.subtitle || 'Average Data over Time Period'
     },
     tooltip: {
       crosshairs: true,
@@ -62,9 +62,9 @@ export class DataChartsComponent implements OnInit {
   ngOnChanges() {
     this.chartOptions.series = this.data;
     this.chartOptions.xAxis.categories = this.xdata;
-    this.chartOptions.title.text = this.title;
-    this.chartOptions.subtitle.text = this.subtitle;
-    this.chartOptions.yAxis.title.text = this.ytitle;
+    this.chartOptions.title.text = this.title || 'Parameters vs Timestamp Plot';
+    this.chartOptions.subtitle.text = this.subtitle || 'Average Data over Time Period';
+    this.chartOptions.yAxis.title.text = this.ytitle || 'Parametric Value';
 
     console.log('Data changed from Input');
     this.updateFlag = true;

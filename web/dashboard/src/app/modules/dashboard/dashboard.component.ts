@@ -13,16 +13,17 @@ import { GraphsService } from '../graphs.service';
 })
 export class DashboardComponent implements OnInit {
 
+  searchLocation = [];
+
+  // Graph Details
   bigChart = [];
   xdata = [];
-  chartsData = [];
-  searchLocation = [];
+  title: string;
+  subtitle: string;
 
   public weatherSearchForm: FormGroup;
   public weatherData: any;
   public airData: any;
-
-  nodeData = [];
 
   constructor(
     private titleService: Title,
@@ -54,11 +55,16 @@ export class DashboardComponent implements OnInit {
     const back = new Date();
     back.setDate(back.getDate() - 10);
 
-    // this.nodeData = this.graphService.getNodeData('Temperature', back.toISOString() , today.toISOString());
-    // console.log(this.nodeData[0]);
-    this.graphService.getData().subscribe(data => {
-      this.bigChart = data[0].sensorGraph;
-      this.xdata = data[0].timeStamps;
+    this.graphService.getDayAverageData().subscribe(data => {
+      this.bigChart = data.bundle[0].sensorGraph;
+      this.bigChart[0].data.slice(-10);
+      this.bigChart[1].data.slice(-10);
+      this.bigChart[2].data.slice(-10);
+      this.bigChart[3].data.slice(-10);
+      this.xdata = data.bundle[0].timeStamps;
+      this.xdata.slice(-10);
+      this.title = 'Day Average Plot';
+      this.subtitle = 'Plot: Environmental parameters vs Day average';
       console.log('Updated');
     });
   }

@@ -4,64 +4,66 @@ const router = express.Router();
 const Controller = require('../models/Controller');
 const Node_data = require('../models/Node_data');
 
-router.post('/fetchAll', async (req, res) => {
+
+// Fetches all data in a given date Bundles together
+router.post('/date', async (req, res) => {
     const { propertyID } = req.body;
-    const { controllerID } = req.body;
-    let { startDateTime } = req.body;
-    let { endDateTime } = req.body;
-
-    if(!startDateTime) {
-        startDateTime = ("2020-01-01T00:00:00.000Z");
-    }
-    if(!endDateTime) {
-        endDateTime = new Date();
-    }
-    try {
-        if(!controllerID) {
-            controller = await Controller.findOne({ propertyID });
-        } else {
-            controller = await Controller.findOne({ propertyID, controllerID });
-        }
-        if(controller) {
-            var controllerDetails = (controller);
-        } else {
-            console.error(err);
-            res.status(404).json('Property ID did not return any available controller');
-        }
-        var nodeDetails = [];
-        Node_data.find( { propertyID, dateTime: { $gte: startDateTime, $lt: endDateTime } } , function(err, nodes, next) {
-            if(err){
-                res.status(500).json('There was some error fetching data!');
-                next();
-            }
-            nodeDetails.push(nodes);
-            //console.log(endDateTime);
-            var message = "Here is the result for Controller : " + controller.controllerID;
-            res.status(200).json({ message, controllerDetails, nodeDetails});    
-        });
-    } catch ( err ) {
-        console.error(err);
-        res.status(500).json('Server error');
-    }
-});
-
-router.post('/data', async (req, res) => {
-    const { propertyID } = req.body;
-    const { params } = req.body;
-    let { startDateTime } = req.body;
-    let { endDateTime } = req.body;
-
-    if(!startDateTime) {
-        startDateTime = ("2020-01-01T00:00:00.000Z");
-    }
-    if(!endDateTime) {
-        endDateTime = new Date();
-    }
-
+    // Feb 26 2020 <-- Format expected
+    let { getDate } = req.body;
     let graphData = [];
 
     try {
-        Node_data.find({ propertyID } , function(err, nodes, next) {
+        Node_data.find({ 
+            propertyID
+        }, function(err, nodes, next) {
+            if(err){
+                res.status(500).json('Some Error Occured');
+                console.log(err);
+                next();
+            }
+            nodes.forEach(node => {
+                graphData.push({
+                    deviceID: node.deviceID,
+                    timeStamps: [],
+                    sensorGraph: [
+                        {name : "Temperature", data : []},
+                        {name : "Humidity", data : []},
+                        {name : "Soil Moisture", data : []},
+                        {name : "Solar Intensity", data : []}
+                    ]
+                });
+
+                let last = graphData[graphData.length-1];
+                node.sensorData.forEach(dataPack => {
+                    if(getDate == dataPack.timeStamp.toString().substring(4, 15)){
+                        last.sensorGraph[0].data.push(dataPack.temp);
+                        last.sensorGraph[1].data.push(dataPack.humidity);
+                        last.sensorGraph[2].data.push(dataPack.moisture);
+                        last.sensorGraph[3].data.push(dataPack.solarIntensity);
+                        // For X-axis plotting
+                        last.timeStamps.push(dataPack.timeStamp.toTimeString().substring(0, 8));
+                    }
+                });
+
+            });
+            res.status(200).json(graphData);
+        }).select("sensorData deviceID");
+    } catch (err) {
+        console.error(err);
+        res.status(500).json('Some error occured!');
+    }
+});
+
+// Return Day average Data Parameters
+router.post('/data', async (req, res) => {
+    const { propertyID } = req.body;
+    const { params } = req.body;
+    let graphData = [];
+
+    try {
+        Node_data.find({ 
+            propertyID
+        }, function(err, nodes, next) {
             if(err){
                 res.status(500).json('Some Error Occured');
                 console.log(err);
@@ -79,18 +81,39 @@ router.post('/data', async (req, res) => {
                         {name : "Solar Intensity", data : []}
                     ]
                 });
+
+                let last = graphData[graphData.length-1];
+                let lastTimeStamp=null, temp=null, humidity=null, moisture=null, solarIntensity=null;
+
                 node.sensorData.forEach(dataPack => {
-                    let last = graphData[graphData.length-1];
-                    last.sensorGraph[0].data.push(dataPack.temp);
-                    last.sensorGraph[1].data.push(dataPack.humidity);
-                    last.sensorGraph[2].data.push(dataPack.moisture);
-                    last.sensorGraph[3].data.push(dataPack.solarIntensity);
-                    // For X-axis plotting
-                    last.timeStamps.push(dataPack.timeStamp.toString().substring(0, 10));
+                    if(dataPack.temp!=0 && dataPack.humidity!=0){
+                        if(lastTimeStamp == dataPack.timeStamp.toString().substring(0, 10)){
+                            temp = (temp + dataPack.temp)/2;
+                            humidity = Math.round((humidity + dataPack.humidity)/2);
+                            moisture = Math.round((moisture + dataPack.moisture)/2);
+                            solarIntensity = Math.round((solarIntensity + dataPack.solarIntensity)/2);
+                            last.sensorGraph[0].data.pop();
+                            last.sensorGraph[1].data.pop();
+                            last.sensorGraph[2].data.pop();
+                            last.sensorGraph[3].data.pop();
+                        }else{
+                            temp = dataPack.temp;
+                            humidity = dataPack.humidity;
+                            moisture = dataPack.moisture;
+                            solarIntensity = dataPack.solarIntensity;
+                            // For X-axis plotting
+                            last.timeStamps.push(dataPack.timeStamp.toString().substring(0, 10));
+                        }
+                        last.sensorGraph[0].data.push(temp);
+                        last.sensorGraph[1].data.push(humidity);
+                        last.sensorGraph[2].data.push(moisture);
+                        last.sensorGraph[3].data.push(solarIntensity);
+                        lastTimeStamp = dataPack.timeStamp.toString().substring(0, 10);
+                    }
                 });
 
             });
-            res.status(200).json(graphData);
+            res.status(200).json({bundle:graphData});
         }).select("sensorData deviceID");
     } catch (err) {
         console.error(err);

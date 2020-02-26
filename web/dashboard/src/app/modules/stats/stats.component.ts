@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { GraphsService } from '../graphs.service';
 
 @Component({
   selector: 'app-stats',
@@ -8,13 +9,27 @@ import { Title } from '@angular/platform-browser';
 })
 export class StatsComponent implements OnInit {
 
-  //constructor() { }
+  // Graph Details
+  seriesChart = [];
+  xdata = [];
+  title: string;
+  subtitle: string;
+
+  constructor(
+    private titleService: Title,
+    private graphService: GraphsService
+  ) {
+    this.titleService.setTitle('AgroSmart - Status');
+  }
 
   ngOnInit() {
+    this.graphService.getDayAverageData().subscribe(data => {
+      data.bundle.forEach(datum => {
+        this.seriesChart.push(datum.sensorGraph);
+        this.xdata.push(datum.timeStamps);
+      });
+    });
   }
 
-  constructor(private titleService:Title) {
-    this.titleService.setTitle("AgroSmart - Status");
-  }
 
 }
