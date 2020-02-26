@@ -95,14 +95,58 @@ router.post('/update', async (req, res) => {
     try {
         let controller = await Controller.findOne({ controllerID });
         if (controller) {
-            let update = await Controller.updateOne({ controllerID }, { $set: { relay1, relay2, relay3, relay4, servo1 } });
+            let update = await Controller.updateOne({ controllerID }, { $set: { relay1:0, relay2:0, relay3:0, relay4:0, servo1:90 } });
             if (update) {
-                res.status(200).json('Controller Status Update, Acknoledged!');
+                res.status(200).json('Controller Status Updated, Acknoledged!');
             } else {
                 res.status(502).json('There was some error!');
             }
         } else {
             res.status(404).json('Controller ID not Found');
+        }
+    } catch (err) {
+        console.error(err);
+        res.status(500).json('Internal Server Error');
+    }
+});
+
+router.post('/change', async (req, res) => {
+    const { controllerID } = req.body;
+    const { propertyID } = req.body;
+    const { key } = req.body; //1,2,3,4, 5 - servo
+    const { value } = req.body;
+    let update, relay1, relay2, relay3, relay4, servo1;
+
+    try {
+        let controller = await Controller.findOne({ controllerID });
+        if (controller) {
+            if ( key == 1 ) {
+                relay1 = value;
+                update = await Controller.updateOne({ controllerID }, { $set: { relay1 } });
+            } else if ( key == 2 ) {
+                relay2 = value;
+                update = await Controller.updateOne({ controllerID }, { $set: { relay2 } });
+            } else if ( key == 3 ) {
+                relay3 = value;
+                update = await Controller.updateOne({ controllerID }, { $set: { relay3 } });
+            } else if ( key == 4 ) {
+                relay4 = value;
+                update = await Controller.updateOne({ controllerID }, { $set: { relay4 } });
+            } else if ( key == 5 ) {
+                servo1 = value;
+                update = await Controller.updateOne({ controllerID }, { $set: { servo1 } });
+            } else {
+                update = null;
+            }       
+            
+            
+            if (update) {
+                res.status(200).json('Controller Status Updated, Acknoledged!');
+            } else {
+                res.status(200).json('There was some error!');
+            }
+        } else {
+            res.status(200).json('Controller ID not Found');
         }
     } catch (err) {
         console.error(err);
