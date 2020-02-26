@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { SetupService } from 'src/app/modules/setup.service';
 
 
 @Component({
@@ -11,17 +12,18 @@ export class CardsComponent implements OnInit {
   @Input() label: String;
   @Input() switchText: String;
   @Input() toggleState: Boolean;
-  @Input() propertyID: String;
+  @Input() controllerID: String;
   @Input() keyID: Number;
 
-  constructor() { }
+  constructor(private Setup: SetupService) { }
 
   ngOnInit() {
     
   }
-
-  changeState(e, pID, kID) {
-    console.log(e.checked + " " + pID + " " + kID );
+  changeState(value, controllerID, key) {
+    //console.log(e.checked + " " + pID + " " + kID );
+    
+    this.Setup.setControllerState(controllerID,key,value.checked);
   }
 
 }

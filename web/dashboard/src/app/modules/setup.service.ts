@@ -72,4 +72,15 @@ export class SetupService {
       propertyID, deviceID
     })
   }
+
+  setControllerState(controllerID, key, val) {
+    let value = val?1:0;
+    //console.log(controllerID + " " + key + " " + val + " | " + value);
+    
+    return this.http.post('/api/controller/change', {
+      controllerID, key, value
+    }).subscribe( data => {
+      console.log("State of Controller Changed to " + val)
+    });
+  }
 }
