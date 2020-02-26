@@ -5,6 +5,8 @@ import { ApixuService } from '../apixu.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { GraphsService } from '../graphs.service';
+import { SetupService } from '../setup.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-dashboard',
@@ -24,17 +26,27 @@ export class DashboardComponent implements OnInit {
   public weatherSearchForm: FormGroup;
   public weatherData: any;
   public airData: any;
+  controllers: any;
+  //controllerID : string;
 
   constructor(
     private titleService: Title,
     private dashBoardService: DashboardService,
     private apixuService: ApixuService,
     private graphService: GraphsService,
+    private Setup: SetupService,
+    private cookieService: CookieService
     ) {
     this.titleService.setTitle('AgroSmart - DashBoard');
   }
 
   ngOnInit() {
+
+    let propertyID = this.cookieService.get('propertyId');
+
+    this.Setup.getControllers(propertyID).subscribe(data => {
+      this.controllers = data["controllerDetails"]["0"];
+    });
 
     this.searchLocation = this.dashBoardService.currentPlace();
 
@@ -66,6 +78,12 @@ export class DashboardComponent implements OnInit {
       this.title = 'Day Average Plot';
       this.subtitle = 'Plot: Environmental parameters vs Day average';
       console.log('Updated');
+    });
+  }
+
+  getController(controllerID) {
+    this.dashBoardService.getControllerState(controllerID).subscribe(data => {
+
     });
   }
 }

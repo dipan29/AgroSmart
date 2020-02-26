@@ -5,6 +5,26 @@ const Controller = require('../models/Controller');
 
 const shortid = require('shortid');
 
+router.post('/getControllers', async (req, res) => {
+    const { propertyID } = req.body;
+
+    var controllerDetails = [];
+    try {
+        Controller.find({ propertyID } , function(err, nodes, next) {
+            if(err){
+                res.status(500).json('Some Error Occured');
+                console.log(err);
+                next();
+            }
+            controllerDetails.push(nodes);
+            res.status(200).json( { controllerDetails });
+        }).select("controllerID controllerType");            
+    } catch (err) {
+        console.error(err);
+        res.status(500).json('Internal Server Error');
+    }
+});
+
 router.get('/:id', async (req, res) => {
     try {
         let controller = await Controller.findOne({ controllerID: req.params.id });
@@ -86,16 +106,16 @@ router.post('/create', async (req, res) => {
 
 router.post('/update', async (req, res) => {
     const { controllerID } = req.body;
-    const { relay1 } = req.body;
-    const { relay2 } = req.body;
-    const { relay3 } = req.body;
-    const { relay4 } = req.body;
-    const { servo1 } = req.body;
+    let { relay1 } = req.body?req.body:0;
+    let { relay2 } = req.body?req.body:0;
+    let { relay3 } = req.body?req.body:0;
+    let { relay4 } = req.body?req.body:0;
+    let { servo1 } = req.body?req.body:90;
 
     try {
         let controller = await Controller.findOne({ controllerID });
         if (controller) {
-            let update = await Controller.updateOne({ controllerID }, { $set: { relay1:0, relay2:0, relay3:0, relay4:0, servo1:90 } });
+            let update = await Controller.updateOne({ controllerID }, { $set: { relay1, relay2, relay3, relay4, servo1 } });
             if (update) {
                 res.status(200).json('Controller Status Updated, Acknoledged!');
             } else {

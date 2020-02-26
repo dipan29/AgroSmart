@@ -54,6 +54,12 @@ export class SetupService {
     })
   }
 
+  getControllers(propertyID) {
+    return this.http.post('/api/controller/getControllers', {
+      propertyID
+    })
+  }
+
   setupController(propertyId, controllerId) {
     var controllerType = 'AG Smart Controller';
     return this.http.post<controller>('/api/controller/create', {

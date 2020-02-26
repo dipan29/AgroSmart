@@ -2,17 +2,21 @@
     <mat-card fxFlex="40">
         <h3>Today's Weather</h3>
         <p>
-            Temperature : {{ this.weatherData?.current?.temperature }}°C | Humidity : {{ this.weatherData?.current?.humidity || 'NA' }}% | Precipitation : {{ this.weatherData?.current?.precip || '0' }}%           
-        <br></p>
-        
+            Temperature : {{ this.weatherData?.current?.temperature }}°C | Humidity :
+            {{ this.weatherData?.current?.humidity || 'NA' }}% | Precipitation :
+            {{ this.weatherData?.current?.precip || '0' }}%
+            <br></p>
+
         <span class="weather-span">Location: {{ searchLocation }}</span>
-        <span class="weather-span fr-0">Results Provider : <a href="https://weatherstack.com/" target="_blank">WeatherStack</a></span>
+        <span class="weather-span fr-0">Results Provider : <a href="https://weatherstack.com/"
+                target="_blank">WeatherStack</a></span>
     </mat-card>
     <mat-card fxFlex="60">
         <h3>Today's Air Quality</h3>
         <p>
-            Air Quality Information (AQI) : {{ this.airData?.data?.aqi || 'N/A' }} | PM2.5 : {{ this.airData?.data?.iaqi?.pm25?.v || 'N/A'}} | SPM : {{ this.airData?.data?.iaqi?.p?.v || 'N/A'}}
-        <br></p>
+            Air Quality Information (AQI) : {{ this.airData?.data?.aqi || 'N/A' }} | PM2.5 :
+            {{ this.airData?.data?.iaqi?.pm25?.v || 'N/A'}} | SPM : {{ this.airData?.data?.iaqi?.p?.v || 'N/A'}}
+            <br></p>
         <span class="weather-span">Location: {{ searchLocation }} | Index : micro-grams/cubic meter</span>
         <span class="weather-span fr-0">Results Provider : <a href="https://aqicn.org/" target="_blank">Aqicn</a></span>
     </mat-card>
@@ -31,9 +35,24 @@
 <br>
 <mat-divider></mat-divider>
 <br>
+<div class="row">
+    <mat-card>
+        <h3 style="text-align: center;">Manage Controllers</h3>
+        <!-- <mat-label>Select controller from dropdown</mat-label> -->
+        <mat-select name="controllerID" placeholder="Select Controller from Dropdown">
+            <mat-option *ngFor="let controller of controllers" [value]="controller.controllerID">
+                {{ controller.controllerID }} - {{ controller.controllerType }}
+            </mat-option>
+        </mat-select>
+
+        <p>The relay and pump controls are listed below.</p>
+    </mat-card>
+</div>
+<br />
+<br />
 <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px" class="control-card">
     <mat-card fxFlex="25">
-        <app-cards  label="Motor Pump 1" switchText="Turn On" toggleState="false"></app-cards>
+        <app-cards label="Motor Pump 1" switchText="Turn On" toggleState="false"></app-cards>
     </mat-card>
     <mat-card fxFlex="25">
         <app-cards label="Motor Pump 2" switchText="Turn On" toggleState="false"></app-cards>

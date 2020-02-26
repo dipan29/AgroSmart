@@ -7,6 +7,17 @@ interface nodeData {
   nodeDetails: any;
 }
 
+interface controller {
+  controllerID: string;
+  relay1: number;
+  relay2: number;
+  relay3: number;
+  relay4: number;
+  servo1: number;
+  solarIntensity: number;
+  lastChangedTime: Date;
+}
+
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +40,11 @@ export class DashboardService {
         propertyID
       })
     } 
+  }
+
+  getControllerState(controllerID) {
+    let url = '/api/controller/' + controllerID;
+    return this.http.get<controller>(url)
   }
 
   currentPlace () {

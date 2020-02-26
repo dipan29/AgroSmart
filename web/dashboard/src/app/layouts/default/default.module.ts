@@ -5,7 +5,7 @@ import { DashboardComponent } from 'src/app/modules/dashboard/dashboard.componen
 import { RouterModule } from '@angular/router';
 import { StatsComponent } from 'src/app/modules/stats/stats.component';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { MatSidenavModule, MatDividerModule, MatCardModule, MatSlideToggleModule, MatButtonModule, MatFormFieldModule, MatInputModule } from '@angular/material';
+import { MatSidenavModule, MatDividerModule, MatCardModule, MatSlideToggleModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatSelectModule } from '@angular/material';
 import { BrowserModule, Title }  from '@angular/platform-browser';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { DashboardService } from 'src/app/modules/dashboard.service';
@@ -39,7 +39,8 @@ import { FormsModule } from '@angular/forms';
     MatSlideToggleModule,
     MatInputModule,
     MatFormFieldModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSelectModule
   ],
   providers: [
     DashboardService,
