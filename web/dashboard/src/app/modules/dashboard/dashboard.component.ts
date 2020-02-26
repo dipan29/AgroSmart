@@ -7,6 +7,7 @@ import { AuthService } from '../auth.service';
 import { GraphsService } from '../graphs.service';
 import { SetupService } from '../setup.service';
 import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -38,12 +39,18 @@ export class DashboardComponent implements OnInit {
     private apixuService: ApixuService,
     private graphService: GraphsService,
     private Setup: SetupService,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private router: Router
     ) {
     this.titleService.setTitle('AgroSmart - DashBoard');
   }
 
   ngOnInit() {
+    
+    if ((!sessionStorage.getItem('loginHash'))) {
+      this.router.navigate(['/setup'])
+    }
+
     this.defaultController = this.cookieService.get('controllerId');
     
     this.controllerChange(this.defaultController);

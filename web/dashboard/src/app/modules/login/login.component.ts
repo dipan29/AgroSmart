@@ -14,6 +14,9 @@ export class LoginComponent implements OnInit {
   constructor(private Auth: AuthService, private router: Router, private cookieService: CookieService) { }
 
   ngOnInit() {
+    if (sessionStorage.getItem('loginHash')) {
+      this.router.navigate([''])
+    }
   }
 
   loginUser(event) {
@@ -39,9 +42,12 @@ export class LoginComponent implements OnInit {
           this.Auth.setLoggedIn(true, name, username);
           console.log(username + " was logged in!", name);
         })
-        if (this.cookieService.get('propertyId')) {
+
+        if (sessionStorage.getItem('loginHash')) {
           this.router.navigate([''])
-        } else {
+        }
+
+        if (!this.cookieService.get('propertyId')) {
           this.router.navigate(['/setup/selectProperty'])
         }
 

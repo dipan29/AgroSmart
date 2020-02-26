@@ -17,7 +17,10 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {  }
 
   logout(){
+    sessionStorage.removeItem('loginHash');
     sessionStorage.clear();
+    //sessionStorage.removeItem('loginHash');
+    //this.cookieService.deleteAll();
     this.cookieService.delete('user_email');
     this.router.navigateByUrl('/setup');
   }
