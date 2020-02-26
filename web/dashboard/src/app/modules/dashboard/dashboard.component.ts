@@ -19,9 +19,12 @@ export class DashboardComponent implements OnInit {
 
   // Graph Details
   bigChart = [];
+  relays = [false,false,false,false];
+  servo: number = 90;
   xdata = [];
   title: string;
   subtitle: string;
+  public defaultController: string;
 
   public weatherSearchForm: FormGroup;
   public weatherData: any;
@@ -41,6 +44,9 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.defaultController = this.cookieService.get('controllerId');
+    
+    this.controllerChange(this.defaultController);
 
     let propertyID = this.cookieService.get('propertyId');
 
@@ -81,8 +87,21 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+  controllerChange(controllerID){
+    //let controllerID = 
+    //console.log("On Change - "+ controllerID);
+    this.getController(controllerID);
+  }
+
   getController(controllerID) {
+    this.defaultController = controllerID;
     this.dashBoardService.getControllerState(controllerID).subscribe(data => {
+      this.relays[0] = data.relay1?true:false;
+      this.relays[1] = data.relay2?true:false;
+      this.relays[2] = data.relay3?true:false;
+      this.relays[3] = data.relay4?true:false;
+      //console.log(this.relays);
+      this.servo = data.servo1;
 
     });
   }

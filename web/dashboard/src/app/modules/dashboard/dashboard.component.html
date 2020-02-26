@@ -39,12 +39,12 @@
     <mat-card>
         <h3 style="text-align: center;">Manage Controllers</h3>
         <!-- <mat-label>Select controller from dropdown</mat-label> -->
-        <mat-select name="controllerID" placeholder="Select Controller from Dropdown">
+        <mat-select name="controllerID" placeholder="Select Controller from Dropdown" (selectionChange)="controllerChange($event.value)">
             <mat-option *ngFor="let controller of controllers" [value]="controller.controllerID">
                 {{ controller.controllerID }} - {{ controller.controllerType }}
             </mat-option>
         </mat-select>
-
+        <p>Currently Selected Controller ID is - <strong>{{ defaultController }}</strong>. To change go to settings.</p>
         <p>The relay and pump controls are listed below.</p>
     </mat-card>
 </div>
@@ -52,16 +52,16 @@
 <br />
 <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px" class="control-card">
     <mat-card fxFlex="25">
-        <app-cards label="Motor Pump 1" switchText="Turn On" toggleState="false"></app-cards>
+        <app-cards label="Motor Pump" switchText="Turn {{ !relays[0]?'On':'Off' }}" toggleState="{{ relays[0] }}" propertyID="{{ defaultController }}" keyID="1"></app-cards>
     </mat-card>
     <mat-card fxFlex="25">
-        <app-cards label="Motor Pump 2" switchText="Turn On" toggleState="false"></app-cards>
+        <app-cards label="Motor Pump" switchText="Turn {{ !relays[1]?'On':'Off' }}" toggleState="{{ relays[1] }}" propertyID="{{ defaultController }}" keyID="2"></app-cards>
     </mat-card>
     <mat-card fxFlex="25">
-        <app-cards label="Switch 3" switchText="Turn Off" toggleState="true"></app-cards>
+        <app-cards label="Switch" switchText="Turn {{ !relays[2]?'On':'Off' }}" toggleState="{{ relays[2] }}" propertyID="{{ defaultController }}" keyID="3"></app-cards>
     </mat-card>
     <mat-card fxFlex="25">
-        <app-cards label="Switch 4" switchText="Turn Off" toggleState="true"></app-cards>
+        <app-cards label="Switch" switchText="Turn {{ !relays[3]?'On':'Off' }}" toggleState="{{ relays[3] }}" propertyID="{{ defaultController }}" keyID="4"></app-cards>
     </mat-card>
 </div>
 <br>
