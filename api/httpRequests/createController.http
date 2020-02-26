@@ -1,8 +1,9 @@
-POST http://localhost:7988/controller/create
+POST http://localhost:7988/controller/change
 Content-Type: application/json
 
 {
-    "propertyId": "123456",
-    "controllerType": "ABC",
-    "controllerId": "122333"
+    "propertyID": "123456",
+    "controllerID": "14710516",
+    "key": 5,
+    "value": 45
 }
