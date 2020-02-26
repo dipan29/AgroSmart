@@ -17,7 +17,7 @@ router.post('/date', async (req, res) => {
             propertyID
         }, function(err, nodes, next) {
             if(err){
-                res.status(500).json('Some Error Occured');
+                res.status(500).json(`Unable to fetch data | Data on ${getData} doesn't Exist`);
                 console.log(err);
                 next();
             }
@@ -35,18 +35,20 @@ router.post('/date', async (req, res) => {
 
                 let last = graphData[graphData.length-1];
                 node.sensorData.forEach(dataPack => {
-                    if(getDate == dataPack.timeStamp.toString().substring(4, 15)){
-                        last.sensorGraph[0].data.push(dataPack.temp);
-                        last.sensorGraph[1].data.push(dataPack.humidity);
-                        last.sensorGraph[2].data.push(dataPack.moisture);
-                        last.sensorGraph[3].data.push(dataPack.solarIntensity);
-                        // For X-axis plotting
-                        last.timeStamps.push(dataPack.timeStamp.toTimeString().substring(0, 8));
+                    if(dataPack.temp!=0 && dataPack.humidity!=0){
+                        if(getDate == dataPack.timeStamp.toString().substring(4, 15)){
+                            last.sensorGraph[0].data.push(dataPack.temp);
+                            last.sensorGraph[1].data.push(dataPack.humidity);
+                            last.sensorGraph[2].data.push(dataPack.moisture);
+                            last.sensorGraph[3].data.push(dataPack.solarIntensity);
+                            // For X-axis plotting
+                            last.timeStamps.push(dataPack.timeStamp.toTimeString().substring(0, 8));
+                        }
                     }
                 });
 
             });
-            res.status(200).json(graphData);
+            res.status(200).json({bundle:graphData});
         }).select("sensorData deviceID");
     } catch (err) {
         console.error(err);
@@ -88,7 +90,7 @@ router.post('/data', async (req, res) => {
                 node.sensorData.forEach(dataPack => {
                     if(dataPack.temp!=0 && dataPack.humidity!=0){
                         if(lastTimeStamp == dataPack.timeStamp.toString().substring(0, 10)){
-                            temp = (temp + dataPack.temp)/2;
+                            temp = Math.round((temp + dataPack.temp)/2);
                             humidity = Math.round((humidity + dataPack.humidity)/2);
                             moisture = Math.round((moisture + dataPack.moisture)/2);
                             solarIntensity = Math.round((solarIntensity + dataPack.solarIntensity)/2);

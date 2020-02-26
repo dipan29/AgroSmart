@@ -9,11 +9,15 @@ import { GraphsService } from '../graphs.service';
 })
 export class StatsComponent implements OnInit {
 
-  // Graph Details
+  // Graph Details Day average
   seriesChart = [];
   xdata = [];
   title: string;
   subtitle: string;
+
+  // Graph for Date
+  dateSeriesChart = [];
+  timeXdata = [];
 
   constructor(
     private titleService: Title,
@@ -27,6 +31,14 @@ export class StatsComponent implements OnInit {
       data.bundle.forEach(datum => {
         this.seriesChart.push(datum.sensorGraph);
         this.xdata.push(datum.timeStamps);
+      });
+    });
+
+    this.graphService.getDateData().subscribe(data => {
+      data.bundle.forEach(datum => {
+        console.log(datum.sensorGraph);
+        this.dateSeriesChart.push(datum.sensorGraph);
+        this.timeXdata.push(datum.timeStamps);
       });
     });
   }
