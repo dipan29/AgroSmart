@@ -2,6 +2,27 @@
     <h3>Smart POD Configuration</h3>
 </div>
 <br>
+<mat-divider></mat-divider>
+<br>
+<div class="card-content">
+    <div class="container">
+        <p>Setup Default Controller from Dropdown.</p>
+        <form class="setup-form-def">
+            <mat-form-field class="form-full-width">
+                <mat-select name="controllerID" placeholder="Default Controller" (selectionChange)="controllerChange($event.value)">
+                    <mat-option *ngFor="let controller of controllers" [value]="controller.controllerID">
+                        {{ controller.controllerID }} - {{ controller.controllerType }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            
+        </form>
+        <p>Current controller default is - <strong>{{ defaultController }}</strong></p>
+    </div>
+</div>
+<br />
+<mat-divider></mat-divider>
+<br />
 <div class="card-content">
     <div class="container">
         <p>Please Enter the Device ID. Check at the back of your node for Device ID.</p>
@@ -14,12 +35,15 @@
             <div class="container-row">
                 <div>
                     <button type="submit" mat-raised-button color="primary" id="submit">Confirm Details</button>
-                
-                &nbsp;  &nbsp;
-                
+
+                    &nbsp; &nbsp;
+
                     <button type="reset" mat-raised-button color="accent" id="reset">Cancel</button>
                 </div>
             </div>
         </form>
     </div>
 </div>
+<br />
+<mat-divider></mat-divider>
+<br />

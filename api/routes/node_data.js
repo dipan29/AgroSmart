@@ -68,6 +68,9 @@ router.post('/setNode', async (req, res) => {
     if (node) {
         // Update the sensor bundle is the device exists
         try {
+            let controllerID = deviceID;
+            let controllerType = deviceType;
+
             let update = await Node_data.updateOne({ deviceID }, { $set: { propertyID, deviceType } });
             let update2 = await Controller.updateOne({ controllerID }, { $set: { propertyID, controllerType } });
             if (update && update2) {
