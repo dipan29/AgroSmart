@@ -31,6 +31,10 @@ export class HeaderComponent implements OnInit {
     this.router.navigateByUrl('/setup/selectProperty');
   }
 
+  help(){        
+    this.router.navigateByUrl('/help');
+  }
+
   toogleSideBar() {
     this.toogleSideBarForMe.emit();
     setTimeout(() => {
