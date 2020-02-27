@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
-
+import { environment } from '../../environments/environment';
 
 interface propertyData {
   success: boolean;
@@ -31,6 +31,7 @@ interface controller {
 @Injectable({
   providedIn: 'root'
 })
+
 export class SetupService {
 
   constructor(private http: HttpClient, private cookieService: CookieService) { }
@@ -43,32 +44,32 @@ export class SetupService {
 
   setupAppDetails(propertyName, uniqueCode, location, latitude, longitude, elevation, area, adminName) {
     // post these details to API server return user info if correct
-    return this.http.post<propertyData>('/api/property/create', {
+    return this.http.post<propertyData>(environment.api + '/property/create', {
       propertyName, uniqueCode, location, latitude, longitude, elevation, area, adminName
     })
   }
 
   getProperties(adminName) {
-    return this.http.post('/api/property/getProperties', {
+    return this.http.post(environment.api + '/property/getProperties', {
       adminName
     })
   }
 
   getControllers(propertyID) {
-    return this.http.post('/api/controller/getControllers', {
+    return this.http.post(environment.api + '/controller/getControllers', {
       propertyID
     })
   }
 
   setupController(propertyId, controllerId) {
     var controllerType = 'AG Smart Controller';
-    return this.http.post<controller>('/api/controller/create', {
+    return this.http.post<controller>(environment.api + '/controller/create', {
       propertyId, controllerId, controllerType
     })
   }
 
   setNodeDetails(propertyID, deviceID) {
-    return this.http.post<nodeDetails>('/api/node_data/setNode', {
+    return this.http.post<nodeDetails>(environment.api + '/node_data/setNode', {
       propertyID, deviceID
     })
   }
@@ -77,7 +78,7 @@ export class SetupService {
     let value = val?1:0;
     //console.log(controllerID + " " + key + " " + val + " | " + value);
     
-    return this.http.post('/api/controller/change', {
+    return this.http.post(environment.api + '/controller/change', {
       controllerID, key, value
     }).subscribe( data => {
       console.log("State of Controller Changed to " + val)
