@@ -27,6 +27,7 @@ export class StatsComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this.graphService.getDayAverageData().subscribe(data => {
       data.bundle.forEach(datum => {
         this.seriesChart.push(datum.sensorGraph);
