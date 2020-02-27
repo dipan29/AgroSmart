@@ -10,7 +10,7 @@
 #include "Agrosmart.h"
 
 #define RELAY_2 D2
-#define RELAY_3 D1
+#define RELAY_3 D5
 #define DHTPIN D7
 #define DHTTYPE DHT11
 #define SERVO_PIN D8
