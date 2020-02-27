@@ -9,8 +9,12 @@
 #include <ArduinoJson.h>
 #include "Agrosmart.h"
 
+#define RELAY_1 D1
 #define RELAY_2 D2
 #define RELAY_3 D5
+#define RELAY_4 D6
+
+
 #define DHTPIN D7
 #define DHTTYPE DHT11
 #define SERVO_PIN D8
@@ -34,7 +38,7 @@ void sendSensorData();
 
 /*====== Async Tasks ====== */
 Task get_relay_state(2000, TASK_FOREVER, &getRelayState);
-Task send_sensor_data(10000, TASK_FOREVER, &sendSensorData);
+Task send_sensor_data(60000, TASK_FOREVER, &sendSensorData);
 Scheduler TaskManager;
 
 /*====== Getting Access Point IP for WiFi Config ====== */
@@ -56,8 +60,10 @@ void getRelayState(){
   Serial.println("..........Printing GET Response..........");
   Serial.println(actuator_data);
   deserializeJson(doc, actuator_data);
+  String r1 = doc["relay1"];
   String r2 = doc["relay2"];
   String r3 = doc["relay3"];
+  String r4 = doc["relay4"];
   String s1 = doc["servo1"];
   digitalWrite(RELAY_2, r2.toInt()?HIGH:LOW);
   digitalWrite(RELAY_3, r3.toInt()?HIGH:LOW);
@@ -78,7 +84,7 @@ void sendSensorData(){
     setMultiplexer(0,0);
     data["moisture"]=String((analogRead(ANALOG_SENSOR)*100)/1024.0);
     
-    // Reading the Sensor at (S1,S0)=(1,0)
+    // Reading the Sensor at (S1,S0)=(0,1)
     setMultiplexer(1,0);
     data["solarIntensity"]=String((analogRead(ANALOG_SENSOR)*100)/1024.0);
 
@@ -95,8 +101,10 @@ void setup() {
   dht.begin();
 
   servo.attach(SERVO_PIN);
+  pinMode(RELAY_1, OUTPUT);
   pinMode(RELAY_2, OUTPUT);
   pinMode(RELAY_3, OUTPUT);
+  pinMode(RELAY_4, OUTPUT);
   pinMode(S0, OUTPUT);
   pinMode(S1, OUTPUT);
   
@@ -106,7 +114,7 @@ void setup() {
   // Let it sleep into the eternal world of darkness after 5 minutes
   wifiManager.setTimeout(300); 
   //On connection Failure
-  if(!wifiManager.autoConnect("Shower when IP", "generic_password")){
+  if(!wifiManager.autoConnect("Agrosmart-Node", "generic_password")){
     Serial.println("Failed Connection to remote Access Point");
     ESP.reset();
     delay(5000);
