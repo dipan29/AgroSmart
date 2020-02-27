@@ -1,0 +1,11 @@
+POST http://localhost:7988/cron/create
+Content-Type: application/json
+
+{
+    "propertyID": "6-YaNQcL",
+    "controllerID": "999922",
+    "cronType": "Once",
+    "key": "1",
+    "value": "1",
+    "cronTime": "2020-01-12T20:17:46.384Z"
+}
