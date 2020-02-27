@@ -53,7 +53,7 @@ async function cronFunction() {
 }
 
 if (cronFunction()) {
-    console.log('');
+    //console.log('');
     process.exit();
 };
 
