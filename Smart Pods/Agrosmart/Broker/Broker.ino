@@ -78,8 +78,8 @@ void sendSensorData(){
     setMultiplexer(0,0);
     data["moisture"]=String((analogRead(ANALOG_SENSOR)*100)/1024.0);
     
-    // Reading the Sensor at (S1,S0)=(0,1)
-    setMultiplexer(0,1);
+    // Reading the Sensor at (S1,S0)=(1,0)
+    setMultiplexer(1,0);
     data["solarIntensity"]=String((analogRead(ANALOG_SENSOR)*100)/1024.0);
 
     //Stringifying JSON Doc
