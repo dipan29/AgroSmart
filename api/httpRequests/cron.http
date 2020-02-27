@@ -3,9 +3,9 @@ Content-Type: application/json
 
 {
     "propertyID": "6-YaNQcL",
-    "controllerID": "999922",
-    "cronType": "Once",
-    "key": "1",
-    "value": "1",
-    "cronTime": "2020-01-12T20:17:46.384Z"
+    "controllerID": "223445",
+    "cronType": "Daily",
+    "key": "5",
+    "value": "90",
+    "cronTime": "2020-02-28T20:17:46.384Z"
 }

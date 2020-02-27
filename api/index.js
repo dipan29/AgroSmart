@@ -1,6 +1,8 @@
 const express = require('express');
 const connectDB = require('./config/db');
-var cors = require('cors')
+var cors = require('cors');
+let cron = require('node-cron');
+let shell = require('shelljs');
 
 const app = express();
 app.use(cors()); //For Cross Origin
@@ -9,6 +11,16 @@ app.use(cors()); //For Cross Origin
 connectDB();
 
 app.use(express.json({ extend: false }));
+
+//CRON SERVICE
+cron.schedule('* * * * *', () => {
+    let d = new Date();
+    let n = d.toISOString();
+    //console.log('Cron Running Every Minute - ' + n);
+    if(shell.exec("node cron.js").code !== 0 ) {
+        console.log('Cron at - '+ n + ' did not run! Check Error Log!');
+    }
+});
 
 // Define Routes
 app.use('/', require('./routes/root'));
