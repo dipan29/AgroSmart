@@ -1,7 +1,8 @@
 {
     "/api": {
-        "target": "http://localhost:7988",
+        "target": "http://api.agrosmart.tech",
         "secure": false,
-        "pathRewrite": {"^/api" : ""}
+        "pathRewrite": {"^/api" : ""},
+        "changeOrigin": true
     }
 }

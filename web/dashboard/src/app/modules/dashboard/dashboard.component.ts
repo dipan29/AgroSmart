@@ -29,6 +29,7 @@ export class DashboardComponent implements OnInit {
 
   public weatherSearchForm: FormGroup;
   public weatherData: any;
+  public forecast: any;
   public airData: any;
   controllers: any;
   //controllerID : string;
@@ -69,6 +70,14 @@ export class DashboardComponent implements OnInit {
         this.weatherData = data;
         console.log(this.weatherData);
       });
+
+    this.apixuService
+      .getForecast(this.searchLocation)
+      .subscribe(data => {
+        this.forecast = data;
+        console.log(this.forecast);
+      });  
+
     this.apixuService
       .getAirQuality(this.searchLocation)
       .subscribe(data => {

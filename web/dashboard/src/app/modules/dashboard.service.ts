@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 interface nodeData {
   message: string;
@@ -36,14 +37,14 @@ export class DashboardService {
     //var propertyID = "6-YaNQcL";
     if(propertyID) {
       console.log("Data for Property ID -  " + this.cookieService.get('propertyId'));
-      return this.http.post<nodeData>('/api/graphs/data', {
+      return this.http.post<nodeData>(environment.api + '/graphs/data', {
         propertyID
       })
     } 
   }
 
   getControllerState(controllerID) {
-    let url = '/api/controller/' + controllerID;
+    let url = environment.api + '/controller/' + controllerID;
     return this.http.get<controller>(url)
   }
 
