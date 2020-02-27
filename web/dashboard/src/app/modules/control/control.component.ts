@@ -26,4 +26,7 @@ export class ControlComponent implements OnInit {
     });
   }
 
+  setupCron(e){
+    
+  }
 }

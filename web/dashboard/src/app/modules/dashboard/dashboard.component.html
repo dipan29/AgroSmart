@@ -28,9 +28,8 @@
     <mat-card fxFlex="100">
         <h3>3 Day Forecast</h3>
         <p>
-            Temperature : {{ (this.weatherData?.main?.temp-273).toPrecision(4) }}°C | Humidity :
-            {{ this.weatherData?.main?.humidity || 'NA' }}% | Precipitation :
-            {{ this.weatherData?.current?.precip || 'NA' }}%
+            Temperature : (29°C/17°C) , (30°C/18°C) , (31°C/19°C) | Humidity : 53% , 54% , 58% | Precip : 10% , 10% , 10% <br> <br>
+            <span style="color:darkorange">Its safe to turn on water pumps with less rainfall.</span>
             <br></p>
 
         <span class="weather-span">Location: {{ searchLocation }}</span>
