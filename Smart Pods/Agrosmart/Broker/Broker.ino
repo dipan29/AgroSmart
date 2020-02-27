@@ -21,8 +21,8 @@
 
 #define ANALOG_SENSOR A0
 
-static String URL_POST = "http://192.168.0.108:7988/node_data/send";
-static String URL_GET = "http://192.168.0.108:7988/controller/"+String(ESP.getChipId());
+static String URL_POST = "http://api.agrosmart.tech/node_data/send";
+static String URL_GET = "http://api.agrosmart.tech/controller/"+String(ESP.getChipId());
 
 AgroSmart agrosmart;
 Servo servo;
