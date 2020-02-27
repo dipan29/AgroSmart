@@ -1,17 +1,17 @@
 <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px" class="weather-card">
-    <mat-card fxFlex="40">
+    <mat-card fxFlex="50">
         <h3>Today's Weather</h3>
         <p>
-            Temperature : {{ this.weatherData?.current?.temperature }}°C | Humidity :
-            {{ this.weatherData?.current?.humidity || 'NA' }}% | Precipitation :
-            {{ this.weatherData?.current?.precip || '0' }}%
+            Temperature : {{ (this.weatherData?.main?.temp-273).toPrecision(4) }}°C | Humidity :
+            {{ this.weatherData?.main?.humidity || 'NA' }}% | Precipitation :
+            {{ this.weatherData?.rain || '10' }}%
             <br></p>
 
         <span class="weather-span">Location: {{ searchLocation }}</span>
-        <span class="weather-span fr-0">Results Provider : <a href="https://weatherstack.com/"
-                target="_blank">WeatherStack</a></span>
+        <span class="weather-span fr-0">Results Provider : <a href="https://openweathermap.org/"
+                target="_blank">OpenWeather API</a></span>
     </mat-card>
-    <mat-card fxFlex="60">
+    <mat-card fxFlex="50">
         <h3>Today's Air Quality</h3>
         <p>
             Air Quality Information (AQI) : {{ this.airData?.data?.aqi || 'N/A' }} | PM2.5 :
@@ -19,6 +19,23 @@
             <br></p>
         <span class="weather-span">Location: {{ searchLocation }} | Index : micro-grams/cubic meter</span>
         <span class="weather-span fr-0">Results Provider : <a href="https://aqicn.org/" target="_blank">Aqicn</a></span>
+    </mat-card>
+</div>
+<br>
+<mat-divider></mat-divider>
+<br>
+<div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px" class="weather-card">
+    <mat-card fxFlex="100">
+        <h3>3 Day Forecast</h3>
+        <p>
+            Temperature : {{ (this.weatherData?.main?.temp-273).toPrecision(4) }}°C | Humidity :
+            {{ this.weatherData?.main?.humidity || 'NA' }}% | Precipitation :
+            {{ this.weatherData?.current?.precip || 'NA' }}%
+            <br></p>
+
+        <span class="weather-span">Location: {{ searchLocation }}</span>
+        <span class="weather-span fr-0">Results Provider : <a href="https://openweathermap.org/"
+                target="_blank">OpenWeather API</a></span>
     </mat-card>
 </div>
 <br>
