@@ -1,4 +1,4 @@
 {
-    "mongoURI": "mongodb://agUser:agrSm#1220@hs1.mindwebs.org:27017/dbAgro",
+    "mongoURI": "mongodb://agUser:yourPassword@localhost:27017/dbAgro",
     "baseUrl": "http://localhost:5000"
 }
