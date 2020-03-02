@@ -1,8 +1,4 @@
 ACCESS DETAILS -
-hostName - hs1.mindwebs.org
-username - agUser
-password - agrSm#1220
-Authentication Database - dbAgro
 
 COMMANDS TO CREATE A NEW DATABASE & USER after logging in as Admin User
 
@@ -10,8 +6,8 @@ COMMANDS TO CREATE A NEW DATABASE & USER after logging in as Admin User
 
 > db.createUser(
   {
-    user: "agUser",
-    pwd: "agrSm#1220",
+    user: "username",
+    pwd: "password",
     roles: [ { role: "readWrite", db: "dbAgro" } ]
   }
 )
