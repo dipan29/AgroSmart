@@ -5,7 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "bcrypt": "^3.0.7",
-    "config": "^3.2.5",
+    "config": "^3.3.8",
     "core-util-is": "^1.0.2",
     "cors": "^2.8.5",
     "express": "^4.17.1",
